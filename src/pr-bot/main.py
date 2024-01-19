@@ -1,12 +1,27 @@
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.prompts import ChatPromptTemplate
+import os
+from langchain_core.output_parsers import JsonOutputParser, StrOutputParser
+from langchain_core.prompts import ChatMessagePromptTemplate,SystemMessagePromptTemplate, ChatPromptTemplate, PipelinePromptTemplate
 from langchain_openai.chat_models import AzureChatOpenAI
-import openai
 
-prompt = ChatPromptTemplate.from_template("Namaste - can you tell met the meaning of the word 'Namaste' in English?")
-model = AzureChatOpenAI(azure_endpoint="https://nl-stu-jvw-openai.openai.azure.com", api_key="8d364dc5b892411991e25933af75863c", deployment_name="gpt-3", api_version="2023-05-15")
-output_parser = StrOutputParser()
+## Using OpenAI GPT-3 model deployed in Azure
+model = AzureChatOpenAI(azure_endpoint="https://nl-stu-jvw-openai.openai.azure.com", 
+                        api_key=os.environ['OPENAI_API_KEY'], 
+                        deployment_name="gpt-3", api_version="2023-05-15")
 
-chain = prompt | model | output_parser | print
+## Force JSON repsonse
+sys_prompt = SystemMessagePromptTemplate.from_template_file("templates/_system.txt", [])
+usr_prompt = ChatMessagePromptTemplate.from_template_file("templates/01_question.txt", [], role="user")
+prompt = ChatPromptTemplate.from_messages([sys_prompt, usr_prompt])
+
+## Since sys prompt forces JSON response, we need to use a JSON output parser
+## And look for 'data' property (see _system.txt template)
+output_parser = JsonOutputParser()
+def print_response(json): print(json['data'])
+
+## Create a pipeline (chain) of prompts
+chain = prompt \
+            | model \
+            | output_parser \
+            | print_response
 
 chain.invoke({})

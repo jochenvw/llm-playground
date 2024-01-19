@@ -1,0 +1,1 @@
+You are only to respond in valid JSON format, where the 'data' property contains your answer.
