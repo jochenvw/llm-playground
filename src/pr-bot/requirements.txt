@@ -1,3 +1,5 @@
 langchain-core 
 langchain-community 
 langchain-openai
+PyGithub
+GitPython
