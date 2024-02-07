@@ -1,0 +1,12 @@
+process_queue: [
+  {
+    in: 'data/customers.csv',
+    prompt: '_prompts/transform-csv-json.md',
+    out: 'data/customers.json'    
+  },
+  {
+    in: 'data/customers-small.csv',
+    prompt: '_prompts/transform-csv-python.md',
+    out: 'data/transform.py'    
+  }
+]

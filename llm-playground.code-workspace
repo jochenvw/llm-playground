@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "src/pr-bot"
+		},
+		{
+			"path": "src/data-wrangling"
 		}
 	],
 	"settings": {}
