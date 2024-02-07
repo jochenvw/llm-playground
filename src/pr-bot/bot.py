@@ -14,38 +14,45 @@ class Util:
 
 class Bot: 
     @staticmethod
-    def RunAssessment(prompt, files, model):
+    def RunAssessment(assessment, folder, files, model):
         for file in files:
-            logger.info("Running prompt " + prompt +" against file " + file + " .. ")
+            logger.info("Running prompt " + assessment['name'] +" against file " + file + " .. ")
 
-            with open(file, "r") as f:
+
+            path = folder + "/" + file
+            if not os.path.exists(path):
+                logger.warning("File " + path + " does not exist - skipping")
+                continue
+            
+            with open(path, "r") as f:
                 oldCode = f.read()
 
-            sys_prompt = SystemMessagePromptTemplate.from_template_file("_prompts/_system.txt", [])
-            get_iac = ChatMessagePromptTemplate.from_template_file(prompt,
+            sys_prompt = SystemMessagePromptTemplate.from_template_file("_prompts/_system.md", [])
+            get_iac = ChatMessagePromptTemplate.from_template_file(assessment['explain-prompt'],
                                                                         input_variables=['input'],
                                                                         role="user")
-            prompt = ChatPromptTemplate.from_messages([sys_prompt, get_iac])
+            prompt_tpl = ChatPromptTemplate.from_messages([sys_prompt, get_iac])
 
             assess = (
                 {"input": RunnablePassthrough()} \
-                | prompt \
+                | prompt_tpl \
                 | model \
                 | JsonOutputParser() \
                 | Util.extract_data
             )
 
-            logger.info("Running prompt " + prompt +" against file " + file + " .. ")
-            newCode = assess.invoke(oldCode)
+            logger.info("Running prompt " + assessment['explain-prompt'] +" against file " + file + " .. ")            
+            explanation = assess.invoke(oldCode)
+            logger.info("LLM response: " + explanation)
 
-            if newCode == oldCode:
-                logger.success("No changes made to file " + file)
-            else:               
-                # overwrite the contents of file f with newcode
-                with open(file, "w") as f:
-                    f.write(newCode)
+            # if newCode == oldCode:
+            #     logger.success("No changes made to file " + file)
+            # else:               
+            #     # overwrite the contents of file f with newcode
+            #     with open(path, "w") as f:
+            #         f.write(str(newCode))
 
-                logger.success("Changes made to file " + file)
+            #     logger.success("Changes made to file " + file)
 
 
     @staticmethod
@@ -59,7 +66,7 @@ class Bot:
             url = gh.get_repo(id).clone_url        
             logger.info("GitHub repo URL: " + url)        
             
-            repoDir = tmpDir + "/" + id
+            repoDir = str(tmpDir) + "/" + id
             git.Repo.clone_from(url, repoDir)
             
             logger.info("GitHub repo cloned into: " + repoDir)
@@ -67,10 +74,11 @@ class Bot:
             files = list(Path(repoDir).rglob("*.*"))
             # join all the 'name' properties of the files into a comma-separated string
             filesStr = ", ".join([str(f) for f in files])
+            filesStr = filesStr.replace(str(tmpDir), "")
             logger.info("GitHub repo contains " + str(len(files)) + " files")
 
-            sys_prompt = SystemMessagePromptTemplate.from_template_file("_prompts/_system.txt", [])
-            get_iac = ChatMessagePromptTemplate.from_template_file("_prompts/01_id_iac_files.txt",
+            sys_prompt = SystemMessagePromptTemplate.from_template_file("_prompts/_system.md", [])
+            get_iac = ChatMessagePromptTemplate.from_template_file("_prompts/01_id_iac_files.md",
                                                                         input_variables=['files'],
                                                                         role="user")
             prompt = ChatPromptTemplate.from_messages([sys_prompt, get_iac])
@@ -95,7 +103,7 @@ class Bot:
             response.append({
                 "id": id,
                 "clone_url": url,
-                "folder": repoDir,
+                "folder": str(tmpDir),
                 "iac_files": iac_files
             })
 

@@ -6,7 +6,7 @@ repos:
 assessments: [
   {
     name: 'security',
-    explain-prompt: '_prompts/02_sec_assess.md',
-    code-prompt: '_prompts/02_sec_code.md',
+    explain-prompt: 'prompts/02_sec_assess.md',
+    code-prompt: 'prompts/02_sec_code.md',
   }
 ]

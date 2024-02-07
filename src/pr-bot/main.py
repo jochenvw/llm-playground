@@ -12,7 +12,7 @@ from bot import Bot
 ## Using OpenAI GPT-3 model deployed in Azure
 model = AzureChatOpenAI(azure_endpoint="https://nl-stu-jvw-openai.openai.azure.com", 
                         api_key=os.environ['OPENAI_API_KEY'], 
-                        deployment_name="gpt-3", api_version="2023-05-15")
+                        deployment_name="gpt4", api_version="2023-05-15")
 
 cfgFilename = 'config.yaml'
 
@@ -31,4 +31,4 @@ for repo in repos:
 
     for assessment in cfg["assessments"]:
         logger.trace("Running assessment " + assessment["name"] + " - on repository " + repo["id"])
-        Bot.RunAssessment(assessment["prompt_path"], repo["iac_files"], model)
+        result = Bot.RunAssessment(assessment, repo["folder"], repo["iac_files"], model)

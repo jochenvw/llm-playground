@@ -1,2 +1,5 @@
 **/venv
 **/.env
+**/*.pyc
+**/<TemporaryDirectory '/
+**/__pycache__/

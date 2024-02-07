@@ -8,12 +8,12 @@ The current security standards are:
 - All Azure SQL Database must have transparent data encryption enabled
 - All Azure Resources must have advanced threat protection enabled
 
-Respond as follows:
-- if this is NOT an infrastructure as code file - respond with original code
-- if this is an infrastructure as code file and you do not see any components that violate the security standards - respond with original code
-- if this is an infrastructure as code file and you see components that violate the security standards - respond with the full original code and only if you find a security issue - please provide a fix for it in the code.
-
 Considering this, please review the code below.
+
+Repond as follows:
+- Respond with "Looks OK - no changes needed :)" if the code meets the security standards
+- In all other cases, respond with what needs to be changed in the code to meet the security standards
+- Respond in JSON as instructed
 
 {input}
 
