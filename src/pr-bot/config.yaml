@@ -3,3 +3,9 @@ repos:
            jochenvw/azure-durable-functions-examples, 
            jochenvw/JavaApp,
            jochenvw/sec-bot]
+assessments: [
+  {
+    name: 'security',
+    prompt_path: 'prompts/02_sec_assess.txt',
+  }
+]
