@@ -6,7 +6,12 @@ repos:
 assessments: [
   {
     name: 'security',
-    explain-prompt: '_prompts/02_sec_assess.md',
+    explain-prompt: '_prompts/02_sec_md.md',
+    code-prompt: '_prompts/02_sec_code.md',
+  },
+  {
+    name: 'finops',
+    explain-prompt: '_prompts/03_finops_md.md',
     code-prompt: '_prompts/02_sec_code.md',
   }
 ]

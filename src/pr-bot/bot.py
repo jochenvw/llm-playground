@@ -1,5 +1,5 @@
-import os, yaml, tempfile, github, git
-from langchain_core.output_parsers import JsonOutputParser
+import os, yaml, tempfile, github, git, random
+from langchain_core.output_parsers import JsonOutputParser, StrOutputParser
 from langchain_core.prompts import ChatMessagePromptTemplate,SystemMessagePromptTemplate, ChatPromptTemplate
 from langchain_openai.chat_models import AzureChatOpenAI
 from langchain_core.runnables import RunnablePassthrough
@@ -14,45 +14,50 @@ class Util:
 
 class Bot: 
     @staticmethod
-    def RunAssessment(assessment, folder, files, model):
+    def RunAssessment(assessment, folder, files, model):        
+        count = 0 + random.randrange(1000,9000)
+
         for file in files:
             logger.info("Running prompt " + assessment['name'] +" against file " + file + " .. ")
 
-
+            # File filtering is not *perfect* :)
             path = folder + "/" + file
             if not os.path.exists(path):
                 logger.warning("File " + path + " does not exist - skipping")
+                continue
+            if os.path.isdir(path):
+                logger.warning("Path " + path + " is a directory - skipping")
                 continue
             
             with open(path, "r") as f:
                 oldCode = f.read()
 
             sys_prompt = SystemMessagePromptTemplate.from_template_file("_prompts/_system.md", [])
-            get_iac = ChatMessagePromptTemplate.from_template_file(assessment['explain-prompt'],
+            check = ChatMessagePromptTemplate.from_template_file(assessment['explain-prompt'],
                                                                         input_variables=['input'],
                                                                         role="user")
-            prompt_tpl = ChatPromptTemplate.from_messages([sys_prompt, get_iac])
+            prompt_tpl = ChatPromptTemplate.from_messages([sys_prompt, check])
 
             assess = (
                 {"input": RunnablePassthrough()} \
                 | prompt_tpl \
                 | model \
-                | JsonOutputParser() \
-                | Util.extract_data
+                | StrOutputParser() \
             )
 
             logger.info("Running prompt " + assessment['explain-prompt'] +" against file " + file + " .. ")            
             explanation = assess.invoke(oldCode)
             logger.info("LLM response: " + explanation)
 
-            # if newCode == oldCode:
-            #     logger.success("No changes made to file " + file)
-            # else:               
-            #     # overwrite the contents of file f with newcode
-            #     with open(path, "w") as f:
-            #         f.write(str(newCode))
+            if explanation == "Looks OK - no changes needed :)":
+                logger.success("No changes made to file " + file)
+            else:               
+                path = "output/" + assessment['name'] + "_" + str(count) + ".md"
+                count += 1
+                with open(path, "w") as f:
+                    f.write(str(explanation))
 
-            #     logger.success("Changes made to file " + file)
+                logger.success("Suggestions written to file " + path)
 
 
     @staticmethod

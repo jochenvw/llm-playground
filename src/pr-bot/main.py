@@ -27,7 +27,7 @@ gh_repos = cfg["repos"]["GitHub"]
 repos = Bot.CheckoutRepos(gh_repos, model)
 
 for repo in repos:
-    logger.info("📋 Working on GitHub repo: " + repo["id"])
+    logger.info("📋 Working on GitHub repo: <green>" + repo["id"] + "</green>")
 
     for assessment in cfg["assessments"]:
         logger.trace("Running assessment " + assessment["name"] + " - on repository " + repo["id"])
