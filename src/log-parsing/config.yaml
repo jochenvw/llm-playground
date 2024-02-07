@@ -1,0 +1,7 @@
+process_queue: [
+  {
+    in: 'data/logs.txt',
+    prompt: '_prompts/analyse_log.md',
+    out: 'data/analysis.md'    
+  },
+]

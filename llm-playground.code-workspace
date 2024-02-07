@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "src/data-wrangling"
+		},
+		{
+			"path": "src/log-parsing"
 		}
 	],
 	"settings": {}
