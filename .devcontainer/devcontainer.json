@@ -10,7 +10,13 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"mechatroner.rainbow-csv"
+				"mechatroner.rainbow-csv",
+				"ms-vscode.vscode-node-azure-pack",
+				"ms-toolsai.vscode-ai",
+				"ms-vscode.azure-repos",
+				"ms-vscode.azurecli",
+				"ms-azuretools.vscode-bicep",
+				"ms-azuretools.rad-vscode-bicep"
 			]
 		}
 	}
