@@ -1,0 +1,10 @@
+langchain-core 
+langchain-community 
+langchain-openai
+PyGithub
+GitPython
+loguru
+pyyaml
+PyGithub
+pygit
+tqdm

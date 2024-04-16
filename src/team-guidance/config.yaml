@@ -1,0 +1,8 @@
+repos:
+  GitHub: [
+    'MicrosoftDocs/azure-docs'
+  ]
+folders:
+  'MicrosoftDocs/azure-docs': [
+    'articles/application-gateway'
+  ]

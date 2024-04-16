@@ -11,6 +11,9 @@
 		},
 		{
 			"path": "src/log-parsing"
+		},
+		{
+			"path": "src/team-guidance"
 		}
 	],
 	"settings": {}
