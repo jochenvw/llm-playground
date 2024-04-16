@@ -11,10 +11,8 @@ from loguru import logger
 from langchain_openai import OpenAIEmbeddings
 
 embeddings_model = AzureOpenAIEmbeddings(azure_endpoint="https://swedencentral.api.cognitive.microsoft.com/", 
-                                    api_key=os.environ['OPENAI_API_KEY'], 
-                                    deployment_name="ada-2", api_version="2023-05-15")
-
-
+                                    api_key=os.environ['OPENAI_API_KEY'],                                    
+                                    model="ada-2", api_version="2023-05-15")
 
 ## Using OpenAI GPT-3 model deployed in Azure
 model = AzureChatOpenAI(azure_endpoint="https://swedencentral.api.cognitive.microsoft.com/", 
@@ -67,3 +65,7 @@ for repo in repoFolders:
                 content = f.read()
                 embeddings_model.embed_documents([content])
 
+
+# Tokens per Minute Rate Limit (thousands): 120
+# Rate limit (Tokens per minute): 120000
+# Rate limit (Requests per minute): 720
