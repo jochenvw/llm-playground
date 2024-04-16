@@ -1,5 +1,9 @@
+# Python stuff
 **/venv
 **/.env
 **/*.pyc
-**/<TemporaryDirectory '/
 **/__pycache__/
+
+# Temp or data folders for downloads etc.
+**/<TemporaryDirectory '/
+**/_data/*
