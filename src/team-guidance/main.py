@@ -69,3 +69,6 @@ for repo in repoFolders:
 # Tokens per Minute Rate Limit (thousands): 120
 # Rate limit (Tokens per minute): 120000
 # Rate limit (Requests per minute): 720
+
+
+# Then https://learn.microsoft.com/en-us/azure/search/vector-search-how-to-create-index?tabs=config-2023-11-01%2Crest-2023-11-01%2Cpush%2Cportal-check-index
