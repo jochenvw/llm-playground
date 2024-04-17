@@ -8,3 +8,5 @@ pyyaml
 PyGithub
 pygit
 tqdm
+azure-search-documents
+tqdm

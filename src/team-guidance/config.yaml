@@ -4,5 +4,6 @@ repos:
   ]
 folders:
   'MicrosoftDocs/azure-docs': [
-    'articles/application-gateway'
+    'articles/application-gateway',
+    'articles/app-service'
   ]
