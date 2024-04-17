@@ -15,7 +15,8 @@ Ensure you follow these rules:
 - You MUST make sure tags are lowercase
 - Tags can be multi-word but then should have "-" and no spaces
 - Tags MUST only contain letters and hyphens.
-- Tags MUST NOT contain any special characters (like newline) or numbers.
+- Tags MUST NOT contain any newline characters
+- Tags MUST NOT contain special characters numbers.
 
 Example of good tags:
 - azure-application-gateway, ssl-policy, configuration
