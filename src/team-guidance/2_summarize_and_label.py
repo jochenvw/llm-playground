@@ -18,22 +18,22 @@ with open(cfgFilename, 'r') as cfgFile:
 
 
 # Load the OpenAI models for embedding and chat
-embeddings_model = AzureOpenAIEmbeddings(azure_endpoint=os.environ['OPENAI_ENDPOINT'], 
+ada2 = AzureOpenAIEmbeddings(azure_endpoint=os.environ['OPENAI_ENDPOINT'], 
                                     api_key=os.environ['OPENAI_API_KEY'],                                    
                                     model="ada-2", api_version="2023-05-15")
 
-model = AzureChatOpenAI(azure_endpoint=os.environ['OPENAI_ENDPOINT'], 
+gpt = AzureChatOpenAI(azure_endpoint=os.environ['OPENAI_ENDPOINT'], 
                         api_key=os.environ['OPENAI_API_KEY'], 
                         deployment_name="gpt-35t", api_version="2023-05-15")
 
-prompt_system = SystemMessagePromptTemplate.from_template_file("_prompts/00_system.md", [])
-prompt_summary = ChatMessagePromptTemplate.from_template_file("_prompts/01_summarize.md",
+sys_prompt = SystemMessagePromptTemplate.from_template_file("_prompts/00_system.md", [])
+summary_prompt = ChatMessagePromptTemplate.from_template_file("_prompts/01_summarize.md",
                                                     input_variables=['documentation'],
                                                     role="user")
-prompt_classify = ChatMessagePromptTemplate.from_template_file("_prompts/02_classify.md",
+tag_prompt = ChatMessagePromptTemplate.from_template_file("_prompts/02_classify.md",
                                                     input_variables=['documentation'],
                                                     role="user")   
-prompt_classify_check = ChatMessagePromptTemplate.from_template_file("_prompts/02b_classify_check.md",
+tag_check_prompt = ChatMessagePromptTemplate.from_template_file("_prompts/02b_classify_check.md",
                                                     input_variables=['tags'],
                                                     role="user")       
                                                     
@@ -56,29 +56,29 @@ for i in progress:
     with open(file, 'r') as f:
         content = f.read()
 
-        # Summarization
+        # summarize the document
         sum_chain = (
             {"documentation": RunnablePassthrough()} 
-            | ChatPromptTemplate.from_messages([prompt_system, prompt_summary])
-            | model 
+            | ChatPromptTemplate.from_messages([sys_prompt, summary_prompt])
+            | gpt 
             | StrOutputParser() 
         )
 
-        # Classification
+        # label/tag the document
         classify_chain = (
             {"documentation": RunnablePassthrough()} 
-            | ChatPromptTemplate.from_messages([prompt_system, prompt_classify]) 
-            | model
+            | ChatPromptTemplate.from_messages([sys_prompt, tag_prompt]) 
+            | gpt
             | {"tags": StrOutputParser()}
-            | ChatPromptTemplate.from_messages([prompt_system, prompt_classify_check]) 
-            | model
+            | ChatPromptTemplate.from_messages([sys_prompt, tag_check_prompt]) 
+            | gpt
             | StrOutputParser()
         )
 
         result = {
             'summary': sum_chain.invoke(content[:4000]), # Limiting to 4K for model token limits
             'tags': classify_chain.invoke(content[:4000]),
-            'embedding': embeddings_model.embed_documents(['content'])
+            'embedding': ada2.embed_documents(['content'])
         }
         
         # write this to a file
