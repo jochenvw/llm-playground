@@ -25,7 +25,13 @@ class util:
             logger.info("Looking for markdown files in folder:" + folder)  
             path = repoDir + "/" + folder
             mds = list(Path(path).rglob("*.md"))
-            files = files + mds
+
+            for md in mds:
+                files.append({
+                    "file": md,
+                    "folder": folder.replace('articles/',"")
+                })
+
             logger.info("Found " + str(len(mds)) + " markdown files")
         
         return files

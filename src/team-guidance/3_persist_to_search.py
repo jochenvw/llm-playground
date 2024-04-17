@@ -17,12 +17,14 @@ for f in all_files:
     # Upload some documents to the index
     with open(os.path.join(folder, f), 'r') as file:  
         doc = json.load(file)
-    
+
     new_doc = {
-        'id': str(counter),
-        'summary': doc['summary'],
+        'id': doc['title'],
+        'content': doc['content'],
         'tags': doc['tags'].split(','),
-        'documentVector': doc['embedding'][0]
+        'contentVector': doc['contentVector'][0],
+        'titleVector': doc['titleVector'][0],
+        'URL' : doc['URL']
     }
     results.append(new_doc)
     counter = counter + 1

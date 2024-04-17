@@ -25,10 +25,14 @@ index_client = SearchIndexClient(service_endpoint, AzureKeyCredential(key))
 name = "azure_docs"
 fields = [
     SimpleField(name="id", type=SearchFieldDataType.String, key=True, sortable=True, filterable=True, facetable=True),
-    SearchableField(name="summary", type=SearchFieldDataType.String),
+    SearchableField(name="title", type=SearchFieldDataType.String),
+    SearchableField(name="content", type=SearchFieldDataType.String),
+    SearchableField(name="URL", type=SearchFieldDataType.String),
     SearchableField(name="tags", type=SearchFieldDataType.String, collection=True),
-    SearchField(name="documentVector", type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
-            searchable=True, vector_search_dimensions=1536, vector_search_profile_name="myHnswProfile")
+    SearchField(name="contentVector", type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
+            searchable=True, vector_search_dimensions=1536, vector_search_profile_name="myHnswProfile"),
+    SearchField(name="titleVector", type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
+            searchable=True, vector_search_dimensions=1536, vector_search_profile_name="myHnswProfile"),
 ]
 
 # Configure the vector search configuration  
@@ -52,7 +56,7 @@ semantic_config = SemanticConfiguration(
     name="my-semantic-config",
     prioritized_fields=SemanticPrioritizedFields(
         keywords_fields=[SemanticField(field_name="tags")],
-        content_fields=[SemanticField(field_name="summary")]
+        content_fields=[SemanticField(field_name="content")]
     )
 )
 

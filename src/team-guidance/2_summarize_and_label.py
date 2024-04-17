@@ -30,6 +30,9 @@ sys_prompt = SystemMessagePromptTemplate.from_template_file("_prompts/00_system.
 summary_prompt = ChatMessagePromptTemplate.from_template_file("_prompts/01_summarize.md",
                                                     input_variables=['documentation'],
                                                     role="user")
+summary_check_prompt = ChatMessagePromptTemplate.from_template_file("_prompts/01b_summary_check.md",
+                                                    input_variables=['documentation'],
+                                                    role="user")
 tag_prompt = ChatMessagePromptTemplate.from_template_file("_prompts/02_classify.md",
                                                     input_variables=['documentation'],
                                                     role="user")   
@@ -49,10 +52,10 @@ for repo in repoFolders:
 
 progress = tqdm(range(len(all_files)))
 for i in progress:
-    file = all_files[i]
-    progress.write("Summarizing and labelling: " + file.name + "...")
+    entry = all_files[i]
+    progress.write("Summarizing and labelling: " + entry['file'].name + "...")
     # Read the file contents
-    with open(file, 'r') as f:
+    with open(entry['file'], 'r') as f:
         content = f.read()
 
         # summarize the document
@@ -60,7 +63,10 @@ for i in progress:
             {"documentation": RunnablePassthrough()} 
             | ChatPromptTemplate.from_messages([sys_prompt, summary_prompt])
             | gpt 
-            | StrOutputParser() 
+            | {"summary": StrOutputParser() }
+            | ChatPromptTemplate.from_messages([sys_prompt, summary_check_prompt])
+            | gpt 
+            | StrOutputParser()
         )
 
         # label/tag the document
@@ -74,14 +80,20 @@ for i in progress:
             | StrOutputParser()
         )
 
+        summary = sum_chain.invoke(content[:4000]) # Limiting to 4K for model token limits
+        tags = classify_chain.invoke(content[:4000])
+
         result = {
-            'summary': sum_chain.invoke(content[:4000]), # Limiting to 4K for model token limits
-            'tags': classify_chain.invoke(content[:4000]),
-            'embedding': ada2.embed_documents(['content'])
+            'title': entry['file'].name.replace(".md", "").replace("_", " "),            
+            'content': summary, 
+            'tags': tags,
+            'contentVector': ada2.embed_documents([summary]),
+            'titleVector': ada2.embed_documents([entry['file'].name]),
+            'URL': 'https://learn.microsoft.com/en-us/azure/' + entry['folder'] + '/' + entry['file'].name.replace(".md", "")
         }
         
         # write this to a file
-        fn = file.name.replace(".md", ".json")
+        fn = entry['file'].name.replace(".md", ".json")
         with open("_processed/" + fn, 'w') as f:
             f.write(json.dumps(result, indent=4))
 
