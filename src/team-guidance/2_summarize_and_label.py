@@ -47,7 +47,6 @@ for repo in repoFolders:
     files_in_folder = util.get_markdown_files(repoDir, folders)
     all_files = all_files + files_in_folder
 
-counter = 0
 progress = tqdm(range(len(all_files)))
 for i in progress:
     file = all_files[i]
@@ -82,8 +81,8 @@ for i in progress:
         }
         
         # write this to a file
-        with open("_processed/" + str(counter) + ".json", 'w') as f:
+        fn = file.name.replace(".md", ".json")
+        with open("_processed/" + fn, 'w') as f:
             f.write(json.dumps(result, indent=4))
-            counter = counter + 1        
 
 logger.success("Summarized and classified " + str(len(all_files)) + " documents")
