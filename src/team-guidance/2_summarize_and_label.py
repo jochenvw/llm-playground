@@ -26,7 +26,17 @@ model = AzureChatOpenAI(azure_endpoint=os.environ['OPENAI_ENDPOINT'],
                         api_key=os.environ['OPENAI_API_KEY'], 
                         deployment_name="gpt-35t", api_version="2023-05-15")
 
-
+prompt_system = SystemMessagePromptTemplate.from_template_file("_prompts/00_system.md", [])
+prompt_summary = ChatMessagePromptTemplate.from_template_file("_prompts/01_summarize.md",
+                                                    input_variables=['documentation'],
+                                                    role="user")
+prompt_classify = ChatMessagePromptTemplate.from_template_file("_prompts/02_classify.md",
+                                                    input_variables=['documentation'],
+                                                    role="user")   
+prompt_classify_check = ChatMessagePromptTemplate.from_template_file("_prompts/02b_classify_check.md",
+                                                    input_variables=['tags'],
+                                                    role="user")       
+                                                    
 # Find markdown documentation files
 repoFolders = cfg["folders"]
 all_files = []
@@ -46,14 +56,6 @@ for i in progress:
     with open(file, 'r') as f:
         content = f.read()
 
-        prompt_system = SystemMessagePromptTemplate.from_template_file("_prompts/00_system.md", [])
-        prompt_summary = ChatMessagePromptTemplate.from_template_file("_prompts/01_summarize.md",
-                                                            input_variables=['documentation'],
-                                                            role="user")
-        prompt_classify = ChatMessagePromptTemplate.from_template_file("_prompts/02_classify.md",
-                                                            input_variables=['documentation'],
-                                                            role="user")        
-
         # Summarization
         sum_chain = (
             {"documentation": RunnablePassthrough()} 
@@ -66,6 +68,9 @@ for i in progress:
         classify_chain = (
             {"documentation": RunnablePassthrough()} 
             | ChatPromptTemplate.from_messages([prompt_system, prompt_classify]) 
+            | model
+            | {"tags": StrOutputParser()}
+            | ChatPromptTemplate.from_messages([prompt_system, prompt_classify_check]) 
             | model
             | StrOutputParser()
         )
