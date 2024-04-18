@@ -3,12 +3,14 @@
 Check the tags for the documentation below. If you see any tags that are missing or incorrect, please update them.
 
 The tags should represent:
+
 - The service or technology the documentation is about.
 - Azure Services must be prefixed by `azure-` (e.g. `azure-application-gateway`)
 - The type of documentation (e.g. installation, configuration, troubleshooting)
 - The sub-topic of the document. What component of the service or technology is the document about?
 
 Ensure you follow these rules:
+
 - You MUST return not more than 5 words/tags
 - You MUST return a list of words as comma-separated values.
 - You MUST return at least 1 word/tag
@@ -19,10 +21,13 @@ Ensure you follow these rules:
 - Tags MUST NOT contain special characters numbers.
 
 Example of good tags:
+
 - azure-application-gateway, ssl-policy, configuration
 - azure-application-gateway, diagnostics, monitoring
 - azure-application-gateway, scaling, availability, sys-ops
 
-# Begin tags
+## Begin tags
+
 {tags}
-# End tags
+
+## End tags
