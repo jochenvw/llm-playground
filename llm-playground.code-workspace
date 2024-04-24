@@ -14,6 +14,9 @@
 		},
 		{
 			"path": "src/team-guidance"
+		},
+		{
+			"path": "src/kql-for-files"
 		}
 	],
 	"settings": {}
