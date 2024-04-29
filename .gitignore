@@ -8,3 +8,9 @@
 # Temp or data folders for downloads etc.
 **/<TemporaryDirectory '/
 **/_data/*
+
+.env
+__pycache__/
+.promptflow/*
+!.promptflow/flow.tools.json
+.runs/

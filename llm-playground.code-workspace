@@ -16,8 +16,13 @@
 			"path": "src/team-guidance"
 		},
 		{
-			"path": "src/kql-for-files"
+			"path": "src/log-to-kql"			
 		}
 	],
-	"settings": {}
+	"settings": {
+		"python.terminal.activateEnvironment": true,
+		"python.analysis.exclude": [
+			"**/_tmp/**",
+		]
+	}
 }

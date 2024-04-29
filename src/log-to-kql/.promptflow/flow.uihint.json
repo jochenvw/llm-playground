@@ -1,0 +1,11 @@
+{
+  "nodes": {
+    "log_to_kql": {
+      "variant_0": {
+        "inputs": {
+          "input": []
+        }
+      }
+    }
+  }
+}

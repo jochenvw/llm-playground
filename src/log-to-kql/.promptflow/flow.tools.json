@@ -1,0 +1,17 @@
+{
+  "package": {},
+  "code": {
+    "log_to_kql.py": {
+      "type": "python",
+      "inputs": {
+        "input": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "log_to_kql.py",
+      "function": "kql_generator_tool"
+    }
+  }
+}

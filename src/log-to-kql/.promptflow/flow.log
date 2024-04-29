@@ -1,0 +1,28 @@
+2024-04-29 14:59:21 +0000   13273 execution.flow     INFO     Start executing nodes in thread pool mode.
+2024-04-29 14:59:21 +0000   13273 execution.flow     INFO     Start to run 1 nodes with concurrency level 16.
+2024-04-29 14:59:21 +0000   13273 execution.flow     INFO     Executing node log_to_kql. node run id: 1d57b955-746e-4d2f-95f4-b192f5bbf15b_log_to_kql_0
+2024-04-29 14:59:21 +0000   13273 execution          ERROR    Node log_to_kql in line 0 failed. Exception: Execution failure in 'log_to_kql': (AttributeError) 'Kernel' object has no attribute 'add_text_completion_service'.
+Traceback (most recent call last):
+  File "/workspaces/llm-playground/src/log-to-kql/.venv/lib/python3.11/site-packages/promptflow/_core/flow_execution_context.py", line 182, in _invoke_tool_inner
+    return f(**kwargs)
+           ^^^^^^^^^^^
+  File "/workspaces/llm-playground/src/log-to-kql/.venv/lib/python3.11/site-packages/promptflow/tracing/_trace.py", line 469, in wrapped
+    output = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/llm-playground/src/log-to-kql/log_to_kql.py", line 19, in kql_generator_tool
+    kernel.add_text_completion_service(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/llm-playground/src/log-to-kql/.venv/lib/python3.11/site-packages/pydantic/main.py", line 811, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'Kernel' object has no attribute 'add_text_completion_service'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspaces/llm-playground/src/log-to-kql/.venv/lib/python3.11/site-packages/promptflow/_core/flow_execution_context.py", line 90, in invoke_tool
+    result = self._invoke_tool_inner(node, f, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/llm-playground/src/log-to-kql/.venv/lib/python3.11/site-packages/promptflow/_core/flow_execution_context.py", line 206, in _invoke_tool_inner
+    raise ToolExecutionError(node_name=node_name, module=module) from e
+promptflow._core._errors.ToolExecutionError: Execution failure in 'log_to_kql': (AttributeError) 'Kernel' object has no attribute 'add_text_completion_service'
+2024-04-29 14:59:21 +0000   13273 execution.flow     ERROR    Flow execution has failed. Cancelling all running nodes: log_to_kql.
