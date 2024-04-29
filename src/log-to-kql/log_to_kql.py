@@ -1,43 +1,43 @@
 import asyncio
-from promptflow.core import tool
-
 import semantic_kernel as sk
 
-from semantic_kernel.planners import SequentialPlanner
-from plugins.FileSystem import FileSystem
+import os
 
-from promptflow.connections import AzureOpenAIConnection
-from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion, AzureTextCompletion
+from semantic_kernel.functions.kernel_arguments import KernelArguments
+from semantic_kernel.planners import SequentialPlanner
+from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
+
+from promptflow.core import tool
+
+from plugins.file_system import FileSystem
+
+
 
 @tool
-def kql_generator_tool(
-    input: str
-) -> str:
+async def kql_generator_tool(input: str) -> str:
     # Initialize the kernel
     kernel = sk.Kernel()
+    kernel.add_service(AzureChatCompletion(
+        service_id="azure_openai_text_completion",
+            deployment_name=os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME"),
+            endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+            api_key=os.getenv("AZURE_OPENAI_API_KEY"),            
+        ))
+
+    planner = SequentialPlanner(kernel=kernel, service_id="azure_openai_text_completion")
+    kernel.add_plugin(FileSystem(), "FileSystem")
+
+    ask = "Use the available filesystem functions to read the first lines of the following textfile: " + input
     
-    kernel.add_text_completion_service(
-        "text_completion",
-        AzureTextCompletion(
-            deployment_name,
-            endpoint=os.getenv("OPENAI_ENDPOINT"),
-            api_key=os.getenv("OPENAI_API_KEY"),
-        )
-    )
-
-    planner = SequentialPlanner(kernel=kernel)
-    kernel.import_plugin(FileSystem(), "FileSystem")
-
-    ask = "Use the available filesystem functions to read the following textfile: " + input
-
-    plan = asyncio.run(planner.create_plan_async(ask))
+    plan =  await planner.create_plan(ask)
 
     # Execute the plan
-    result = asyncio.run(kernel.run_async(plan)).result
+    
+    result = await plan.invoke(kernel=kernel)
 
     for index, step in enumerate(plan._steps):
         print("Function: " + step.plugin_name + "." + step._function.name)
-        print("Input vars: " + str(step.parameters.variables))
+        #print("Input vars: " + str(step.parameters))
         print("Output vars: " + str(step._outputs))
     print("Result: " + str(result))
 

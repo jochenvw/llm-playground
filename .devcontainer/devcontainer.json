@@ -21,7 +21,8 @@
 				"ms-semantic-kernel.semantic-kernel",
 				"prompt-flow.prompt-flow",
 				"KevinRose.vsc-python-indent",
-				"njpwerner.autodocstring"
+				"njpwerner.autodocstring",
+				"ms-python.debugpy"
 			]
 		}
 	}

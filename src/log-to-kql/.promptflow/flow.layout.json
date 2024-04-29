@@ -10,7 +10,12 @@
       "y": 310,
       "index": -1
     },
-    "log_to_kql": {
+    "log": {
+      "x": 800,
+      "y": 42,
+      "index": -1
+    },
+    "logToKql": {
       "x": 140,
       "y": 176,
       "index": 0

@@ -1,1 +1,259 @@
-{}
+{
+  "flow_runs": [
+    {
+      "run_id": "f00b6869-a7a1-42f7-82d1-f7b72350a7e0_0",
+      "status": "Completed",
+      "error": null,
+      "inputs": {
+        "input_file": "./_data_in/apache.log"
+      },
+      "output": {
+        "KQL": "192.168.2.20 - - [28/Jul/2006:10:27:10 -0300] \"GET /cgi-bin/try/ HTTP/1.0\" 200 3395\n127.0.0.1 - - [28/Jul/2006:10:22:04 -0300] \"GET / HTTP/1.0\" 200 2216\n127.0.0.1 - - [28/Jul/2006:10:27:32 -0300] \"GET /hidden/ HTTP/1.0\" 404 7218\n127.0.0.1 - - [13/Sep/2006:07:01:53 -0700] \"PROPFIND /svn/[xxxx]/Extranet/branches/SOW-101 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:01:51 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:53 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/2.5 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:53 -0700] \"PROPFIND /svn/[xxxx]/Extranet/branches/SOW-101 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:21 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:06:59:53 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/2.5 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:06:59:50 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n"
+      },
+      "metrics": null,
+      "request": null,
+      "parent_run_id": "f00b6869-a7a1-42f7-82d1-f7b72350a7e0",
+      "root_run_id": "f00b6869-a7a1-42f7-82d1-f7b72350a7e0",
+      "source_run_id": null,
+      "flow_id": "default_flow_id",
+      "start_time": "2024-04-29T21:05:21.013647Z",
+      "end_time": "2024-04-29T21:05:24.471156Z",
+      "index": 0,
+      "api_calls": [
+        {
+          "name": "flow",
+          "node_name": "flow",
+          "type": "Flow",
+          "start_time": 1714424721.013647,
+          "end_time": 1714424724.471156,
+          "children": [
+            {
+              "name": "kql_generator_tool",
+              "type": "Function",
+              "inputs": {
+                "input": "./_data_in/apache.log"
+              },
+              "output": "192.168.2.20 - - [28/Jul/2006:10:27:10 -0300] \"GET /cgi-bin/try/ HTTP/1.0\" 200 3395\n127.0.0.1 - - [28/Jul/2006:10:22:04 -0300] \"GET / HTTP/1.0\" 200 2216\n127.0.0.1 - - [28/Jul/2006:10:27:32 -0300] \"GET /hidden/ HTTP/1.0\" 404 7218\n127.0.0.1 - - [13/Sep/2006:07:01:53 -0700] \"PROPFIND /svn/[xxxx]/Extranet/branches/SOW-101 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:01:51 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:53 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/2.5 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:53 -0700] \"PROPFIND /svn/[xxxx]/Extranet/branches/SOW-101 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:21 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:06:59:53 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/2.5 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:06:59:50 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n",
+              "start_time": 1714424721.016515,
+              "end_time": 1714424724.469448,
+              "error": null,
+              "children": [
+                {
+                  "name": "openai_chat_async",
+                  "type": "LLM",
+                  "inputs": {
+                    "model": "gpt-4",
+                    "frequency_penalty": 0.0,
+                    "logit_bias": {},
+                    "max_tokens": 1024,
+                    "n": 1,
+                    "presence_penalty": 0.0,
+                    "stream": false,
+                    "temperature": 0.0,
+                    "top_p": 0.0,
+                    "messages": [
+                      {
+                        "role": "user",
+                        "content": "Create an XML plan step by step, to satisfy the goal given, with the available functions.\n\n[AVAILABLE FUNCTIONS]\n\nFileSystem-ReadFileHead:\n  description: Reads the first lines of a file\n  inputs:\n    - filename: The filename of the file to read\n\n[END AVAILABLE FUNCTIONS]\n\nTo create a plan, follow these steps:\n0. The plan should be as short as possible.\n1. From a <goal> create a <plan> as a series of <functions>.\n2. A plan has 'INPUT' available in context variables by default.\n3. Before using any function in a plan, check that it is present in the [AVAILABLE FUNCTIONS] list. If it is not, do not use it.\n4. Only use functions that are required for the given goal.\n5. Append an \"END\" XML comment at the end of the plan after the final closing </plan> tag.\n6. Always output valid XML that can be parsed by an XML parser.\n7. If a plan cannot be created with the [AVAILABLE FUNCTIONS], return <plan />.\n\nAll plans take the form of:\n<plan>\n    <!-- ... reason for taking step ... -->\n    <function.{FullyQualifiedFunctionName} ... />\n    <!-- ... reason for taking step ... -->\n    <function.{FullyQualifiedFunctionName} ... />\n    <!-- ... reason for taking step ... -->\n    <function.{FullyQualifiedFunctionName} ... />\n    (... etc ...)\n</plan>\n<!-- END -->\n\nTo call a function, follow these steps:\n1. A function has one or more named parameters and a single 'output' which are all strings. Parameter values should be xml escaped.\n2. To save an 'output' from a <function>, to pass into a future <function>, use <function.{FullyQualifiedFunctionName} ... setContextVariable=\"<UNIQUE_VARIABLE_KEY>\"/>\n3. To save an 'output' from a <function>, to return as part of a plan result, use <function.{FullyQualifiedFunctionName} ... appendToResult=\"RESULT__<UNIQUE_RESULT_KEY>\"/>\n4. Use a '$' to reference a context variable in a parameter, e.g. when `INPUT='world'` the parameter 'Hello $INPUT' will evaluate to `Hello world`.\n5. Functions do not have access to the context variables of other functions. Do not attempt to use context variables as arrays or objects. Instead, use available functions to extract specific elements or properties from context variables.\n\nDO NOT DO THIS, THE PARAMETER VALUE IS NOT XML ESCAPED:\n<function.Plugin-Name4 input=\"$SOME_PREVIOUS_OUTPUT\" parameter_name=\"some value with a <!-- 'comment' in it-->\"/>\n\nDO NOT DO THIS, THE PARAMETER VALUE IS ATTEMPTING TO USE A CONTEXT VARIABLE AS AN ARRAY/OBJECT:\n<function.Plugin-CallFunction input=\"$OTHER_OUTPUT[1]\"/>\n\nDO NOT DO THIS, THE FUNCTION NAME IS NOT A FULLY QUALIFIED FUNCTION NAME:\n<function.CallFunction input=\"world\"/>\n\nHere is a valid example of how to call a function \"_plugin-Function_Name\" with a single input and save its output:\n<function._plugin-Function_Name input=\"this is my input\" setContextVariable=\"SOME_KEY\"/>\n\nHere is a valid example of how to call a function \"Plugin-FunctionName2\" with a single input and return its output as part of the plan result:\n<function.Plugin-FunctionName2 input=\"Hello $INPUT\" appendToResult=\"RESULT__FINAL_ANSWER\"/>\n\nHere is a valid example of how to call a function \"Name3\" with multiple inputs:\n<function.Plugin-Name3 input=\"$SOME_PREVIOUS_OUTPUT\" parameter_name=\"some value with a &lt;!-- &apos;comment&apos; in it--&gt;\"/>\n\nBegin!\n\n<goal>Use the available filesystem functions to read the first lines of the following textfile: ./_data_in/apache.log</goal>"
+                      }
+                    ]
+                  },
+                  "output": {
+                    "id": "chatcmpl-9JSTXMZmErGdYr9DHRY4JZnRaWosR",
+                    "choices": [
+                      {
+                        "finish_reason": "stop",
+                        "index": 0,
+                        "logprobs": null,
+                        "message": {
+                          "content": "<plan>\n    <!-- Use the FileSystem-ReadFileHead function to read the first lines of the specified file -->\n    <function.FileSystem-ReadFileHead filename=\"./_data_in/apache.log\" appendToResult=\"RESULT__FILE_HEAD\"/>\n</plan>\n<!-- END -->",
+                          "role": "assistant",
+                          "function_call": null,
+                          "tool_calls": null
+                        }
+                      }
+                    ],
+                    "created": 1714424719,
+                    "model": "gpt-4",
+                    "object": "chat.completion",
+                    "system_fingerprint": null,
+                    "usage": {
+                      "completion_tokens": 54,
+                      "prompt_tokens": 810,
+                      "total_tokens": 864
+                    }
+                  },
+                  "start_time": 1714424721.110457,
+                  "end_time": 1714424724.46478,
+                  "error": null,
+                  "children": [],
+                  "node_name": null,
+                  "parent_id": "2a9e8657-5dc7-46e0-b207-dac6df9571bb",
+                  "id": "a040d029-dfa1-456b-a803-46dba8b23b1f",
+                  "function": "openai.resources.chat.completions.AsyncCompletions.create",
+                  "system_metrics": {
+                    "completion_tokens": 54,
+                    "prompt_tokens": 810,
+                    "total_tokens": 864
+                  }
+                }
+              ],
+              "node_name": "logToKql",
+              "parent_id": "",
+              "id": "2a9e8657-5dc7-46e0-b207-dac6df9571bb",
+              "function": "kql_generator_tool",
+              "system_metrics": {
+                "completion_tokens": 54,
+                "prompt_tokens": 810,
+                "total_tokens": 864
+              }
+            }
+          ],
+          "system_metrics": {
+            "duration": 3.457509,
+            "prompt_tokens": 810,
+            "completion_tokens": 54,
+            "total_tokens": 864
+          },
+          "inputs": {
+            "input_file": "./_data_in/apache.log"
+          },
+          "output": {
+            "KQL": "192.168.2.20 - - [28/Jul/2006:10:27:10 -0300] \"GET /cgi-bin/try/ HTTP/1.0\" 200 3395\n127.0.0.1 - - [28/Jul/2006:10:22:04 -0300] \"GET / HTTP/1.0\" 200 2216\n127.0.0.1 - - [28/Jul/2006:10:27:32 -0300] \"GET /hidden/ HTTP/1.0\" 404 7218\n127.0.0.1 - - [13/Sep/2006:07:01:53 -0700] \"PROPFIND /svn/[xxxx]/Extranet/branches/SOW-101 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:01:51 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:53 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/2.5 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:53 -0700] \"PROPFIND /svn/[xxxx]/Extranet/branches/SOW-101 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:21 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:06:59:53 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/2.5 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:06:59:50 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n"
+          },
+          "error": null
+        }
+      ],
+      "name": "",
+      "description": "",
+      "tags": null,
+      "system_metrics": {
+        "duration": 3.457509,
+        "prompt_tokens": 810,
+        "completion_tokens": 54,
+        "total_tokens": 864
+      },
+      "result": {
+        "KQL": "192.168.2.20 - - [28/Jul/2006:10:27:10 -0300] \"GET /cgi-bin/try/ HTTP/1.0\" 200 3395\n127.0.0.1 - - [28/Jul/2006:10:22:04 -0300] \"GET / HTTP/1.0\" 200 2216\n127.0.0.1 - - [28/Jul/2006:10:27:32 -0300] \"GET /hidden/ HTTP/1.0\" 404 7218\n127.0.0.1 - - [13/Sep/2006:07:01:53 -0700] \"PROPFIND /svn/[xxxx]/Extranet/branches/SOW-101 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:01:51 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:53 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/2.5 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:53 -0700] \"PROPFIND /svn/[xxxx]/Extranet/branches/SOW-101 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:21 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:06:59:53 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/2.5 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:06:59:50 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n"
+      },
+      "upload_metrics": false,
+      "otel_trace_id": "0xf3d357035baa800eacc7cb851f10b881",
+      "message_format": "basic"
+    }
+  ],
+  "node_runs": [
+    {
+      "node": "logToKql",
+      "flow_run_id": "f00b6869-a7a1-42f7-82d1-f7b72350a7e0",
+      "run_id": "f00b6869-a7a1-42f7-82d1-f7b72350a7e0_logToKql_0",
+      "status": "Completed",
+      "inputs": {
+        "input": "./_data_in/apache.log"
+      },
+      "output": "192.168.2.20 - - [28/Jul/2006:10:27:10 -0300] \"GET /cgi-bin/try/ HTTP/1.0\" 200 3395\n127.0.0.1 - - [28/Jul/2006:10:22:04 -0300] \"GET / HTTP/1.0\" 200 2216\n127.0.0.1 - - [28/Jul/2006:10:27:32 -0300] \"GET /hidden/ HTTP/1.0\" 404 7218\n127.0.0.1 - - [13/Sep/2006:07:01:53 -0700] \"PROPFIND /svn/[xxxx]/Extranet/branches/SOW-101 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:01:51 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:53 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/2.5 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:53 -0700] \"PROPFIND /svn/[xxxx]/Extranet/branches/SOW-101 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:21 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:06:59:53 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/2.5 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:06:59:50 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n",
+      "metrics": null,
+      "error": null,
+      "parent_run_id": "f00b6869-a7a1-42f7-82d1-f7b72350a7e0_0",
+      "start_time": "2024-04-29T21:05:21.016407Z",
+      "end_time": "2024-04-29T21:05:24.469977Z",
+      "index": 0,
+      "api_calls": [
+        {
+          "name": "kql_generator_tool",
+          "type": "Function",
+          "inputs": {
+            "input": "./_data_in/apache.log"
+          },
+          "output": "192.168.2.20 - - [28/Jul/2006:10:27:10 -0300] \"GET /cgi-bin/try/ HTTP/1.0\" 200 3395\n127.0.0.1 - - [28/Jul/2006:10:22:04 -0300] \"GET / HTTP/1.0\" 200 2216\n127.0.0.1 - - [28/Jul/2006:10:27:32 -0300] \"GET /hidden/ HTTP/1.0\" 404 7218\n127.0.0.1 - - [13/Sep/2006:07:01:53 -0700] \"PROPFIND /svn/[xxxx]/Extranet/branches/SOW-101 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:01:51 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:53 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/2.5 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:53 -0700] \"PROPFIND /svn/[xxxx]/Extranet/branches/SOW-101 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:21 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:06:59:53 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/2.5 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:06:59:50 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n",
+          "start_time": 1714424721.016515,
+          "end_time": 1714424724.469448,
+          "error": null,
+          "children": [
+            {
+              "name": "openai_chat_async",
+              "type": "LLM",
+              "inputs": {
+                "model": "gpt-4",
+                "frequency_penalty": 0.0,
+                "logit_bias": {},
+                "max_tokens": 1024,
+                "n": 1,
+                "presence_penalty": 0.0,
+                "stream": false,
+                "temperature": 0.0,
+                "top_p": 0.0,
+                "messages": [
+                  {
+                    "role": "user",
+                    "content": "Create an XML plan step by step, to satisfy the goal given, with the available functions.\n\n[AVAILABLE FUNCTIONS]\n\nFileSystem-ReadFileHead:\n  description: Reads the first lines of a file\n  inputs:\n    - filename: The filename of the file to read\n\n[END AVAILABLE FUNCTIONS]\n\nTo create a plan, follow these steps:\n0. The plan should be as short as possible.\n1. From a <goal> create a <plan> as a series of <functions>.\n2. A plan has 'INPUT' available in context variables by default.\n3. Before using any function in a plan, check that it is present in the [AVAILABLE FUNCTIONS] list. If it is not, do not use it.\n4. Only use functions that are required for the given goal.\n5. Append an \"END\" XML comment at the end of the plan after the final closing </plan> tag.\n6. Always output valid XML that can be parsed by an XML parser.\n7. If a plan cannot be created with the [AVAILABLE FUNCTIONS], return <plan />.\n\nAll plans take the form of:\n<plan>\n    <!-- ... reason for taking step ... -->\n    <function.{FullyQualifiedFunctionName} ... />\n    <!-- ... reason for taking step ... -->\n    <function.{FullyQualifiedFunctionName} ... />\n    <!-- ... reason for taking step ... -->\n    <function.{FullyQualifiedFunctionName} ... />\n    (... etc ...)\n</plan>\n<!-- END -->\n\nTo call a function, follow these steps:\n1. A function has one or more named parameters and a single 'output' which are all strings. Parameter values should be xml escaped.\n2. To save an 'output' from a <function>, to pass into a future <function>, use <function.{FullyQualifiedFunctionName} ... setContextVariable=\"<UNIQUE_VARIABLE_KEY>\"/>\n3. To save an 'output' from a <function>, to return as part of a plan result, use <function.{FullyQualifiedFunctionName} ... appendToResult=\"RESULT__<UNIQUE_RESULT_KEY>\"/>\n4. Use a '$' to reference a context variable in a parameter, e.g. when `INPUT='world'` the parameter 'Hello $INPUT' will evaluate to `Hello world`.\n5. Functions do not have access to the context variables of other functions. Do not attempt to use context variables as arrays or objects. Instead, use available functions to extract specific elements or properties from context variables.\n\nDO NOT DO THIS, THE PARAMETER VALUE IS NOT XML ESCAPED:\n<function.Plugin-Name4 input=\"$SOME_PREVIOUS_OUTPUT\" parameter_name=\"some value with a <!-- 'comment' in it-->\"/>\n\nDO NOT DO THIS, THE PARAMETER VALUE IS ATTEMPTING TO USE A CONTEXT VARIABLE AS AN ARRAY/OBJECT:\n<function.Plugin-CallFunction input=\"$OTHER_OUTPUT[1]\"/>\n\nDO NOT DO THIS, THE FUNCTION NAME IS NOT A FULLY QUALIFIED FUNCTION NAME:\n<function.CallFunction input=\"world\"/>\n\nHere is a valid example of how to call a function \"_plugin-Function_Name\" with a single input and save its output:\n<function._plugin-Function_Name input=\"this is my input\" setContextVariable=\"SOME_KEY\"/>\n\nHere is a valid example of how to call a function \"Plugin-FunctionName2\" with a single input and return its output as part of the plan result:\n<function.Plugin-FunctionName2 input=\"Hello $INPUT\" appendToResult=\"RESULT__FINAL_ANSWER\"/>\n\nHere is a valid example of how to call a function \"Name3\" with multiple inputs:\n<function.Plugin-Name3 input=\"$SOME_PREVIOUS_OUTPUT\" parameter_name=\"some value with a &lt;!-- &apos;comment&apos; in it--&gt;\"/>\n\nBegin!\n\n<goal>Use the available filesystem functions to read the first lines of the following textfile: ./_data_in/apache.log</goal>"
+                  }
+                ]
+              },
+              "output": {
+                "id": "chatcmpl-9JSTXMZmErGdYr9DHRY4JZnRaWosR",
+                "choices": [
+                  {
+                    "finish_reason": "stop",
+                    "index": 0,
+                    "logprobs": null,
+                    "message": {
+                      "content": "<plan>\n    <!-- Use the FileSystem-ReadFileHead function to read the first lines of the specified file -->\n    <function.FileSystem-ReadFileHead filename=\"./_data_in/apache.log\" appendToResult=\"RESULT__FILE_HEAD\"/>\n</plan>\n<!-- END -->",
+                      "role": "assistant",
+                      "function_call": null,
+                      "tool_calls": null
+                    }
+                  }
+                ],
+                "created": 1714424719,
+                "model": "gpt-4",
+                "object": "chat.completion",
+                "system_fingerprint": null,
+                "usage": {
+                  "completion_tokens": 54,
+                  "prompt_tokens": 810,
+                  "total_tokens": 864
+                }
+              },
+              "start_time": 1714424721.110457,
+              "end_time": 1714424724.46478,
+              "error": null,
+              "children": [],
+              "node_name": null,
+              "parent_id": "2a9e8657-5dc7-46e0-b207-dac6df9571bb",
+              "id": "a040d029-dfa1-456b-a803-46dba8b23b1f",
+              "function": "openai.resources.chat.completions.AsyncCompletions.create",
+              "system_metrics": {
+                "completion_tokens": 54,
+                "prompt_tokens": 810,
+                "total_tokens": 864
+              }
+            }
+          ],
+          "node_name": "logToKql",
+          "parent_id": "",
+          "id": "2a9e8657-5dc7-46e0-b207-dac6df9571bb",
+          "function": "kql_generator_tool",
+          "system_metrics": {
+            "completion_tokens": 54,
+            "prompt_tokens": 810,
+            "total_tokens": 864
+          }
+        }
+      ],
+      "cached_run_id": null,
+      "cached_flow_run_id": null,
+      "logs": {
+        "stdout": "[2024-04-29T21:05:24+0000] Function: FileSystem.ReadFileHead\n[2024-04-29T21:05:24+0000] Output vars: ['RESULT__FILE_HEAD']\n[2024-04-29T21:05:24+0000] Result: 192.168.2.20 - - [28/Jul/2006:10:27:10 -0300] \"GET /cgi-bin/try/ HTTP/1.0\" 200 3395\n127.0.0.1 - - [28/Jul/2006:10:22:04 -0300] \"GET / HTTP/1.0\" 200 2216\n127.0.0.1 - - [28/Jul/2006:10:27:32 -0300] \"GET /hidden/ HTTP/1.0\" 404 7218\n127.0.0.1 - - [13/Sep/2006:07:01:53 -0700] \"PROPFIND /svn/[xxxx]/Extranet/branches/SOW-101 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:01:51 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:53 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/2.5 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:53 -0700] \"PROPFIND /svn/[xxxx]/Extranet/branches/SOW-101 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:21 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:06:59:53 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/2.5 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:06:59:50 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n\n",
+        "stderr": ""
+      },
+      "system_metrics": {
+        "completion_tokens": 54,
+        "prompt_tokens": 810,
+        "total_tokens": 864,
+        "duration": 3.45357
+      },
+      "result": "192.168.2.20 - - [28/Jul/2006:10:27:10 -0300] \"GET /cgi-bin/try/ HTTP/1.0\" 200 3395\n127.0.0.1 - - [28/Jul/2006:10:22:04 -0300] \"GET / HTTP/1.0\" 200 2216\n127.0.0.1 - - [28/Jul/2006:10:27:32 -0300] \"GET /hidden/ HTTP/1.0\" 404 7218\n127.0.0.1 - - [13/Sep/2006:07:01:53 -0700] \"PROPFIND /svn/[xxxx]/Extranet/branches/SOW-101 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:01:51 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:53 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/2.5 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:53 -0700] \"PROPFIND /svn/[xxxx]/Extranet/branches/SOW-101 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:07:00:21 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:06:59:53 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/2.5 HTTP/1.1\" 401 587\n127.0.0.1 - - [13/Sep/2006:06:59:50 -0700] \"PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1\" 401 587\n",
+      "message_format": "basic"
+    }
+  ]
+}

@@ -2,18 +2,18 @@ $schema: https://azuremlschemas.azureedge.net/promptflow/latest/Flow.schema.json
 environment:
   python_requirements_txt: requirements.txt
 inputs:
-  LogFile:
+  input_file:
     type: string
     default: ./_data_in/apache.log
 outputs:
   KQL:
     type: string
-    reference: ${log_to_kql.output}
+    reference: ${logToKql.output}
 nodes:
-- name: log_to_kql
+- name: logToKql
   type: python
   source:
     type: code
     path: log_to_kql.py
   inputs:
-    input: ${inputs.LogFile}
+    input: ${inputs.input_file}

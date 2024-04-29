@@ -6,6 +6,13 @@
           "input": []
         }
       }
+    },
+    "logToKql": {
+      "variant_0": {
+        "inputs": {
+          "input": []
+        }
+      }
     }
   }
 }
