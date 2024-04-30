@@ -5,8 +5,8 @@ Attempt to prove the ability of a Large Language Model (LLM) to write Kusto Quer
 ## Architecture Decision Records (ADRs)
 Some ligtweight documentation of the decisions made in this project can be found in the [docs/](./docs/) folder.
 
-- [Use Promptflow as orchestration library](./docs/adr/adr_promptflow.md)
-- [Use Semantic Kernel as LLM interaction library](./docs/adr/adr_semantic_kernel.md)
+- [Use Promptflow as orchestration library](./docs/adr_promptflow.md)
+- [Use Semantic Kernel as LLM interaction library](./docs/adr_semantic_kernel.md)
 
 # Get started
 
