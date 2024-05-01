@@ -1,5 +1,6 @@
 import asyncio
 import semantic_kernel as sk
+from dotenv import load_dotenv
 
 import os
 
@@ -15,6 +16,9 @@ from plugins.file_system import FileSystem
 
 @tool
 async def kql_generator_tool(input: str) -> str:
+    # Ensures we read .env file variables
+    load_dotenv()
+    
     # Initialize the kernel
     kernel = sk.Kernel()
     kernel.add_service(AzureChatCompletion(

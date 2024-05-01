@@ -1,9 +1,9 @@
-2024-04-29 21:05:21 +0000   27727 execution.flow     INFO     Start executing nodes in async mode.
-2024-04-29 21:05:21 +0000   27727 execution.flow     INFO     Start to run 1 nodes with the current event loop.
-2024-04-29 21:05:21 +0000   27727 execution.flow     INFO     Executing node logToKql. node run id: f00b6869-a7a1-42f7-82d1-f7b72350a7e0_logToKql_0
-2024-04-29 21:05:24 +0000   27727 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Function: FileSystem.ReadFileHead
-2024-04-29 21:05:24 +0000   27727 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Output vars: ['RESULT__FILE_HEAD']
-2024-04-29 21:05:24 +0000   27727 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Result: 192.168.2.20 - - [28/Jul/2006:10:27:10 -0300] "GET /cgi-bin/try/ HTTP/1.0" 200 3395
+2024-05-01 09:38:51 +0000    7398 execution.flow     INFO     Start executing nodes in async mode.
+2024-05-01 09:38:51 +0000    7398 execution.flow     INFO     Start to run 1 nodes with the current event loop.
+2024-05-01 09:38:51 +0000    7398 execution.flow     INFO     Executing node logToKql. node run id: fa7c64fe-090a-4f6d-820f-03e241643eea_logToKql_0
+2024-05-01 09:38:56 +0000    7398 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Function: FileSystem.ReadFileHead
+2024-05-01 09:38:56 +0000    7398 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Output vars: ['RESULT__FILE_HEAD']
+2024-05-01 09:38:56 +0000    7398 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Result: 192.168.2.20 - - [28/Jul/2006:10:27:10 -0300] "GET /cgi-bin/try/ HTTP/1.0" 200 3395
 127.0.0.1 - - [28/Jul/2006:10:22:04 -0300] "GET / HTTP/1.0" 200 2216
 127.0.0.1 - - [28/Jul/2006:10:27:32 -0300] "GET /hidden/ HTTP/1.0" 404 7218
 127.0.0.1 - - [13/Sep/2006:07:01:53 -0700] "PROPFIND /svn/[xxxx]/Extranet/branches/SOW-101 HTTP/1.1" 401 587
@@ -13,4 +13,4 @@
 127.0.0.1 - - [13/Sep/2006:07:00:21 -0700] "PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1" 401 587
 127.0.0.1 - - [13/Sep/2006:06:59:53 -0700] "PROPFIND /svn/[xxxx]/[xxxx]/2.5 HTTP/1.1" 401 587
 127.0.0.1 - - [13/Sep/2006:06:59:50 -0700] "PROPFIND /svn/[xxxx]/[xxxx]/trunk HTTP/1.1" 401 587
-2024-04-29 21:05:24 +0000   27727 execution.flow     INFO     Node logToKql completes.
+2024-05-01 09:38:56 +0000    7398 execution.flow     INFO     Node logToKql completes.
