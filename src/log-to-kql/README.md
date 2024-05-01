@@ -8,6 +8,8 @@ Some ligtweight documentation of the decisions made in this project can be found
 - [Use Promptflow as orchestration library](./docs/adr_promptflow.md)
 - [Use Semantic Kernel as LLM interaction library](./docs/adr_semantic_kernel.md)
 
+More on [ADRs](https://www.thoughtworks.com/radar/techniques/lightweight-architecture-decision-records) | [Even more](https://adr.github.io/) | [Template used](https://adr.github.io/madr/#example)
+
 # Get started
 
 ## Note on usage of virtual environments (VENVs)
@@ -17,25 +19,16 @@ Therefore - I'm **not** using vritual environments for now.
 
 `pip install -r requirements.txt` to get your depenedencies.
 
-## Pre-reqs
+## Pre-reqs - tools
 
 - VSCode
 - DevContainer extension installed (requires docker and perhaps WSL2)
 - Azure subscription
 - Azure CLI: `curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash`
 
-## Setting up your environment
+## Pre-reqs - environment
 
-Ensure env variables are set. Lookg at `.env.example` for the required variables and copy to a `.env` file. Then run the following command to set the environment variables:
-
-```
-set -a # automatically export all variables
-source .env
-set +a
-```
-
-Check:
-```
-printenv | grep AZURE
-```
+- Ensure env variables are set. Lookg at `.env.example` for the required variables and copy to a `.env` file. `dotenv` will take care of loading.
+- Have Azure Monitor workspace deployed
+- Have service principal that has access to the Azure Monitor workspace for testing KQL queries
 
