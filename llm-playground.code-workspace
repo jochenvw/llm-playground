@@ -23,6 +23,7 @@
 		"python.terminal.activateEnvironment": true,
 		"python.analysis.exclude": [
 			"**/_tmp/**",
-		]
+		],
+		"files.eol": "\n"
 	}
 }
