@@ -10,6 +10,13 @@ Some ligtweight documentation of the decisions made in this project can be found
 
 # Get started
 
+## Note on usage of virtual environments (VENVs)
+
+Whereas I'm a proponent of using these - the VSCode plugins for Semantic Kernel and Prompflow seem to index these `.venv` in their totality. This makes it (at least on my machine) impossible to work with.
+Therefore - I'm **not** using vritual environments for now.
+
+`pip install -r requirements.txt` to get your depenedencies.
+
 ## Pre-reqs
 
 - VSCode
