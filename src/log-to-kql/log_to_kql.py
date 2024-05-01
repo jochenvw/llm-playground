@@ -1,4 +1,3 @@
-import asyncio
 import semantic_kernel as sk
 from dotenv import load_dotenv
 
@@ -11,8 +10,6 @@ from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
 from promptflow.core import tool
 
 from plugins.file_system import FileSystem
-
-
 
 @tool
 async def kql_generator_tool(input: str) -> str:
@@ -29,9 +26,12 @@ async def kql_generator_tool(input: str) -> str:
         ))
 
     planner = SequentialPlanner(kernel=kernel, service_id="azure_openai_text_completion")
+        
     kernel.add_plugin(FileSystem(), "FileSystem")
+    kernel.add_plugin(plugin_name="extraction", parent_directory="./plugins")
 
-    ask = "Use the available filesystem functions to read the first lines of the following textfile: " + input
+    
+    ask = "Use the available plugins to: 1 - read the beginning of the log file and 2 - write a KQL query that extracts fields from the log: " + input
     
     plan =  await planner.create_plan(ask)
 
@@ -41,7 +41,7 @@ async def kql_generator_tool(input: str) -> str:
 
     for index, step in enumerate(plan._steps):
         print("Function: " + step.plugin_name + "." + step._function.name)
-        #print("Input vars: " + str(step.parameters))
+        print("Input vars: " + str(step.parameters))
         print("Output vars: " + str(step._outputs))
     print("Result: " + str(result))
 

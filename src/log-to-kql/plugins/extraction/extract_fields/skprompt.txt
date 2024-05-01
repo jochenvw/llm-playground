@@ -1,0 +1,46 @@
+Write a Kusto Query Language (KQL) query that extracts all the fields from the loglines below. 
+
+Fields could be:
+- IP Address e.g. 127.0.2.200 or 218.188.2.4
+- Date e.g. 'Jun 14 15:16:02'
+- Message e.g. 'authentication failure' or 'check pass; user unknown'
+- Response code e.g. 200 or 404
+- User e.g. 'root' or 'admin'
+
+Relevant KQL functions syntax:
+- Joining strings (concatenation): strcat(argument1, argument2 [, argument3 ... ])
+- Datetime parsing: todatetime(value)
+- Splitting strings: split(source, delimiter [, requestedIndex])
+
+Do NOT:
+- Name columns any of the following 'date', 'time'
+
+Example:
+
+[INPUT]
+127.0.0.1 200 GET /index.htm
+127.0.0.1 200 GET /index.htm
+127.0.0.1 200 GET /index.htm
+127.0.0.1 200 GET /index.htm
+[END INPUT]
+
+[KQL]
+datatable (message:string) [
+    '127.0.0.1 200 GET /index.htm',
+    '127.0.0.1 200 GET /index.htm',
+    '127.0.0.1 200 GET /index.htm',
+    '127.0.0.1 200 GET /index.htm',
+]
+| project 
+    ip = split(message," ")[0],
+    httpResultCode = split(message," ")[1],
+    httpMethod = split(message," ")[2] ,
+    doc = split(message," ")[3]
+[END KQL]
+
+
+[INPUT]
+{{$input}}
+[END INPUT]
+
+[KQL]

@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "description": "Create KQL that demonstrates extracting fields from a line in a logfile",
+  "execution_settings": {
+    "default": {
+      "max_tokens": 2048,
+      "temperature": 0.0,
+      "top_p": 0.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  }
+}
