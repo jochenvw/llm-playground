@@ -1,31 +1,31 @@
 {
   "flow_runs": [
     {
-      "run_id": "03a9e5e5-c286-4a6b-96f1-51a5615f4a51_0",
+      "run_id": "75f7c2cb-728b-4823-af17-c8064387b1a3_0",
       "status": "Completed",
       "error": null,
       "inputs": {
         "input_file": "./_data_in/apache.log"
       },
       "output": {
-        "KQL": "datatable (message:string) [\n    'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root'\n]\n| project \n    logDate = todatetime(strcat(split(message,\" \")[0], \" \", split(message,\" \")[1], \" \", split(message,\" \")[2], \" \", split(message,\" \")[3])),\n    ipAddress = split(split(message,\" \")[12], \"=\")[1],\n    logMessage = strcat(split(message,\" \")[5], \" \", split(message,\" \")[6])\n[END KQL]"
+        "KQL": "datatable (message:string) [\n    'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root'\n]\n| project \n    logDate = todatetime(strcat(split(message,\" \")[0], \" \", split(message,\" \")[1], \" \", split(message,\" \")[2], \" \", split(message,\" \")[3])),\n    logMessage = strcat(split(message,\": \")[1], split(message,\": \")[2]),\n    ipAddress = split(split(message,\" \")[-1], \" \")[0],\n    user = split(split(message,\" \")[-1], \" \")[1]\n"
       },
       "metrics": null,
       "request": null,
-      "parent_run_id": "03a9e5e5-c286-4a6b-96f1-51a5615f4a51",
-      "root_run_id": "03a9e5e5-c286-4a6b-96f1-51a5615f4a51",
+      "parent_run_id": "75f7c2cb-728b-4823-af17-c8064387b1a3",
+      "root_run_id": "75f7c2cb-728b-4823-af17-c8064387b1a3",
       "source_run_id": null,
       "flow_id": "default_flow_id",
-      "start_time": "2024-05-01T13:19:48.370792Z",
-      "end_time": "2024-05-01T13:20:51.159742Z",
+      "start_time": "2024-05-01T15:42:13.928205Z",
+      "end_time": "2024-05-01T15:43:21.062460Z",
       "index": 0,
       "api_calls": [
         {
           "name": "flow",
           "node_name": "flow",
           "type": "Flow",
-          "start_time": 1714569588.370792,
-          "end_time": 1714569651.159742,
+          "start_time": 1714578133.928205,
+          "end_time": 1714578201.06246,
           "children": [
             {
               "name": "kql_generator_tool",
@@ -33,9 +33,9 @@
               "inputs": {
                 "input": "./_data_in/apache.log"
               },
-              "output": "datatable (message:string) [\n    'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root'\n]\n| project \n    logDate = todatetime(strcat(split(message,\" \")[0], \" \", split(message,\" \")[1], \" \", split(message,\" \")[2], \" \", split(message,\" \")[3])),\n    ipAddress = split(split(message,\" \")[12], \"=\")[1],\n    logMessage = strcat(split(message,\" \")[5], \" \", split(message,\" \")[6])\n[END KQL]",
-              "start_time": 1714569588.373222,
-              "end_time": 1714569651.157547,
+              "output": "datatable (message:string) [\n    'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root'\n]\n| project \n    logDate = todatetime(strcat(split(message,\" \")[0], \" \", split(message,\" \")[1], \" \", split(message,\" \")[2], \" \", split(message,\" \")[3])),\n    logMessage = strcat(split(message,\": \")[1], split(message,\": \")[2]),\n    ipAddress = split(split(message,\" \")[-1], \" \")[0],\n    user = split(split(message,\" \")[-1], \" \")[1]\n",
+              "start_time": 1714578133.950027,
+              "end_time": 1714578201.046298,
               "error": null,
               "children": [
                 {
@@ -54,47 +54,47 @@
                     "messages": [
                       {
                         "role": "user",
-                        "content": "Create an XML plan step by step, to satisfy the goal given, with the available functions.\n\n[AVAILABLE FUNCTIONS]\n\nFileSystem-ReadFileHead:\n  description: Reads the first lines of a file\n  inputs:\n    - filename: The filename of the file to read\n\nextraction-extract_fields:\n  description: Create KQL that demonstrates extracting fields from a line in a logfile\n  inputs:\n    - input: \n\n[END AVAILABLE FUNCTIONS]\n\nTo create a plan, follow these steps:\n0. The plan should be as short as possible.\n1. From a <goal> create a <plan> as a series of <functions>.\n2. A plan has 'INPUT' available in context variables by default.\n3. Before using any function in a plan, check that it is present in the [AVAILABLE FUNCTIONS] list. If it is not, do not use it.\n4. Only use functions that are required for the given goal.\n5. Append an \"END\" XML comment at the end of the plan after the final closing </plan> tag.\n6. Always output valid XML that can be parsed by an XML parser.\n7. If a plan cannot be created with the [AVAILABLE FUNCTIONS], return <plan />.\n\nAll plans take the form of:\n<plan>\n    <!-- ... reason for taking step ... -->\n    <function.{FullyQualifiedFunctionName} ... />\n    <!-- ... reason for taking step ... -->\n    <function.{FullyQualifiedFunctionName} ... />\n    <!-- ... reason for taking step ... -->\n    <function.{FullyQualifiedFunctionName} ... />\n    (... etc ...)\n</plan>\n<!-- END -->\n\nTo call a function, follow these steps:\n1. A function has one or more named parameters and a single 'output' which are all strings. Parameter values should be xml escaped.\n2. To save an 'output' from a <function>, to pass into a future <function>, use <function.{FullyQualifiedFunctionName} ... setContextVariable=\"<UNIQUE_VARIABLE_KEY>\"/>\n3. To save an 'output' from a <function>, to return as part of a plan result, use <function.{FullyQualifiedFunctionName} ... appendToResult=\"RESULT__<UNIQUE_RESULT_KEY>\"/>\n4. Use a '$' to reference a context variable in a parameter, e.g. when `INPUT='world'` the parameter 'Hello $INPUT' will evaluate to `Hello world`.\n5. Functions do not have access to the context variables of other functions. Do not attempt to use context variables as arrays or objects. Instead, use available functions to extract specific elements or properties from context variables.\n\nDO NOT DO THIS, THE PARAMETER VALUE IS NOT XML ESCAPED:\n<function.Plugin-Name4 input=\"$SOME_PREVIOUS_OUTPUT\" parameter_name=\"some value with a <!-- 'comment' in it-->\"/>\n\nDO NOT DO THIS, THE PARAMETER VALUE IS ATTEMPTING TO USE A CONTEXT VARIABLE AS AN ARRAY/OBJECT:\n<function.Plugin-CallFunction input=\"$OTHER_OUTPUT[1]\"/>\n\nDO NOT DO THIS, THE FUNCTION NAME IS NOT A FULLY QUALIFIED FUNCTION NAME:\n<function.CallFunction input=\"world\"/>\n\nHere is a valid example of how to call a function \"_plugin-Function_Name\" with a single input and save its output:\n<function._plugin-Function_Name input=\"this is my input\" setContextVariable=\"SOME_KEY\"/>\n\nHere is a valid example of how to call a function \"Plugin-FunctionName2\" with a single input and return its output as part of the plan result:\n<function.Plugin-FunctionName2 input=\"Hello $INPUT\" appendToResult=\"RESULT__FINAL_ANSWER\"/>\n\nHere is a valid example of how to call a function \"Name3\" with multiple inputs:\n<function.Plugin-Name3 input=\"$SOME_PREVIOUS_OUTPUT\" parameter_name=\"some value with a &lt;!-- &apos;comment&apos; in it--&gt;\"/>\n\nBegin!\n\n<goal>Use the available plugins to: 1 - read the beginning of the log file and 2 - write a KQL query that extracts fields from the log: ./_data_in/apache.log</goal>"
+                        "content": "Create an XML plan step by step, to satisfy the goal given, with the available functions.\n\n[AVAILABLE FUNCTIONS]\n\nazure_monitor-ExecuteKQL:\n  description: Executes a KQL against an Azure Monitor workspace\n  inputs:\n    - kql_query: The KQL query to execute\n\nfile_system-ReadFileHead:\n  description: Reads the first lines of a file\n  inputs:\n    - filename: The filename of the file to read\n\nextraction-extract_fields:\n  description: Create KQL that demonstrates extracting fields from a line in a logfile\n  inputs:\n    - input: \n\n[END AVAILABLE FUNCTIONS]\n\nTo create a plan, follow these steps:\n0. The plan should be as short as possible.\n1. From a <goal> create a <plan> as a series of <functions>.\n2. A plan has 'INPUT' available in context variables by default.\n3. Before using any function in a plan, check that it is present in the [AVAILABLE FUNCTIONS] list. If it is not, do not use it.\n4. Only use functions that are required for the given goal.\n5. Append an \"END\" XML comment at the end of the plan after the final closing </plan> tag.\n6. Always output valid XML that can be parsed by an XML parser.\n7. If a plan cannot be created with the [AVAILABLE FUNCTIONS], return <plan />.\n\nAll plans take the form of:\n<plan>\n    <!-- ... reason for taking step ... -->\n    <function.{FullyQualifiedFunctionName} ... />\n    <!-- ... reason for taking step ... -->\n    <function.{FullyQualifiedFunctionName} ... />\n    <!-- ... reason for taking step ... -->\n    <function.{FullyQualifiedFunctionName} ... />\n    (... etc ...)\n</plan>\n<!-- END -->\n\nTo call a function, follow these steps:\n1. A function has one or more named parameters and a single 'output' which are all strings. Parameter values should be xml escaped.\n2. To save an 'output' from a <function>, to pass into a future <function>, use <function.{FullyQualifiedFunctionName} ... setContextVariable=\"<UNIQUE_VARIABLE_KEY>\"/>\n3. To save an 'output' from a <function>, to return as part of a plan result, use <function.{FullyQualifiedFunctionName} ... appendToResult=\"RESULT__<UNIQUE_RESULT_KEY>\"/>\n4. Use a '$' to reference a context variable in a parameter, e.g. when `INPUT='world'` the parameter 'Hello $INPUT' will evaluate to `Hello world`.\n5. Functions do not have access to the context variables of other functions. Do not attempt to use context variables as arrays or objects. Instead, use available functions to extract specific elements or properties from context variables.\n\nDO NOT DO THIS, THE PARAMETER VALUE IS NOT XML ESCAPED:\n<function.Plugin-Name4 input=\"$SOME_PREVIOUS_OUTPUT\" parameter_name=\"some value with a <!-- 'comment' in it-->\"/>\n\nDO NOT DO THIS, THE PARAMETER VALUE IS ATTEMPTING TO USE A CONTEXT VARIABLE AS AN ARRAY/OBJECT:\n<function.Plugin-CallFunction input=\"$OTHER_OUTPUT[1]\"/>\n\nDO NOT DO THIS, THE FUNCTION NAME IS NOT A FULLY QUALIFIED FUNCTION NAME:\n<function.CallFunction input=\"world\"/>\n\nHere is a valid example of how to call a function \"_plugin-Function_Name\" with a single input and save its output:\n<function._plugin-Function_Name input=\"this is my input\" setContextVariable=\"SOME_KEY\"/>\n\nHere is a valid example of how to call a function \"Plugin-FunctionName2\" with a single input and return its output as part of the plan result:\n<function.Plugin-FunctionName2 input=\"Hello $INPUT\" appendToResult=\"RESULT__FINAL_ANSWER\"/>\n\nHere is a valid example of how to call a function \"Name3\" with multiple inputs:\n<function.Plugin-Name3 input=\"$SOME_PREVIOUS_OUTPUT\" parameter_name=\"some value with a &lt;!-- &apos;comment&apos; in it--&gt;\"/>\n\nBegin!\n\n<goal>Use the available plugins to: \n\n1 - read the beginning of the log file and \n2 - write a KQL query that extracts fields from the log\n3 - execute the KQL query against the Azure Monitor workspace\n\n./_data_in/apache.log</goal>"
                       }
                     ]
                   },
                   "output": {
-                    "id": "chatcmpl-9K4A96Se6PBtcPOtsY9PJfACynH5o",
+                    "id": "chatcmpl-9K6NzH2GYd7WDX8onyEaHwxc7Rm5O",
                     "choices": [
                       {
                         "finish_reason": "stop",
                         "index": 0,
                         "logprobs": null,
                         "message": {
-                          "content": "<plan>\n    <!-- First, we need to read the beginning of the log file -->\n    <function.FileSystem-ReadFileHead filename=\"./_data_in/apache.log\" setContextVariable=\"LOG_HEAD\"/>\n    <!-- Then, we use the extracted log head to create a KQL query that extracts fields from the log -->\n    <function.extraction-extract_fields input=\"$LOG_HEAD\" appendToResult=\"RESULT__KQL_QUERY\"/>\n</plan>\n<!-- END -->",
+                          "content": "<plan>\n    <!-- Step 1: Read the beginning of the log file -->\n    <function.file_system-ReadFileHead filename=\"./_data_in/apache.log\" setContextVariable=\"LOG_HEAD\"/>\n    \n    <!-- Step 2: Write a KQL query that extracts fields from the log -->\n    <function.extraction-extract_fields input=\"$LOG_HEAD\" setContextVariable=\"KQL_QUERY\"/>\n    \n    <!-- Step 3: Execute the KQL query against the Azure Monitor workspace -->\n    <function.azure_monitor-ExecuteKQL kql_query=\"$KQL_QUERY\" appendToResult=\"RESULT__QUERY_EXECUTION\"/>\n</plan>\n<!-- END -->",
                           "role": "assistant",
                           "function_call": null,
                           "tool_calls": null
                         }
                       }
                     ],
-                    "created": 1714569589,
+                    "created": 1714578135,
                     "model": "gpt-4",
                     "object": "chat.completion",
                     "system_fingerprint": null,
                     "usage": {
-                      "completion_tokens": 93,
-                      "prompt_tokens": 857,
-                      "total_tokens": 950
+                      "completion_tokens": 132,
+                      "prompt_tokens": 907,
+                      "total_tokens": 1039
                     }
                   },
-                  "start_time": 1714569588.452641,
-                  "end_time": 1714569601.99684,
+                  "start_time": 1714578134.290792,
+                  "end_time": 1714578152.830848,
                   "error": null,
                   "children": [],
                   "node_name": null,
-                  "parent_id": "3583cb2c-78c7-4615-9718-8ae6edc9fcc3",
-                  "id": "808eed75-27f4-4399-9f1c-fc21a14f298c",
+                  "parent_id": "c63d4ad6-6f35-407f-afb7-e3364faa5221",
+                  "id": "b42ba9d2-131b-4f14-8b16-6a84462ea86b",
                   "function": "openai.resources.chat.completions.AsyncCompletions.create",
                   "system_metrics": {
-                    "completion_tokens": 93,
-                    "prompt_tokens": 857,
-                    "total_tokens": 950
+                    "completion_tokens": 132,
+                    "prompt_tokens": 907,
+                    "total_tokens": 1039
                   }
                 },
                 {
@@ -108,77 +108,77 @@
                     "n": 1,
                     "presence_penalty": 0.0,
                     "stream": false,
-                    "temperature": 0.0,
-                    "top_p": 0.0,
+                    "temperature": 0.5,
+                    "top_p": 0.2,
                     "messages": [
                       {
                         "role": "user",
-                        "content": "Write a Kusto Query Language (KQL) query that extracts all the fields from the loglines below. \n\nFields could be:\n- IP Address e.g. 127.0.2.200\n- Date e.g. 'Jun 14 15:16:02'\n- Message e.g. 'authentication failure' or 'check pass; user unknown'\n- Response code e.g. 200 or 404\n\n\nRelevant KQL functions syntax:\n- Joining strings (concatenation): strcat(argument1, argument2 [, argument3 ... ])\n- Datetime parsing: todatetime(value)\n- Splitting strings: split(source, delimiter [, requestedIndex])\n\nDo NOT:\n- Name columns any of the following 'date', 'time'\n\n\nExample:\n\n[INPUT]\n127.0.0.1 200 GET /index.htm\n127.0.0.1 200 GET /index.htm\n127.0.0.1 200 GET /index.htm\n127.0.0.1 200 GET /index.htm\n[END INPUT]\n\n[KQL]\ndatatable (message:string) [\n    '127.0.0.1 200 GET /index.htm',\n    '127.0.0.1 200 GET /index.htm',\n    '127.0.0.1 200 GET /index.htm',\n    '127.0.0.1 200 GET /index.htm',\n]\n| project \n    ip = split(message,\" \")[0],\n    httpResultCode = split(message,\" \")[1],\n    httpMethod = split(message,\" \")[2] ,\n    doc = split(message,\" \")[3]\n[END KQL]\n\n\n[INPUT]\nJun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4 \nJun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown\nJun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4 \nJun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\n\n[END INPUT]\n\n[KQL]"
+                        "content": "Write a Kusto Query Language (KQL) query that extracts all the fields from the loglines below. \n\nFields could be:\n- IP Address e.g. 127.0.2.200 or 218.188.2.4\n- Date e.g. 'Jun 14 15:16:02'\n- Message e.g. 'authentication failure' or 'check pass; user unknown'\n- Response code e.g. 200 or 404\n- User e.g. 'root' or 'admin'\n\nRelevant KQL functions syntax:\n- Joining strings (concatenation): strcat(argument1, argument2 [, argument3 ... ])\n- Datetime parsing: todatetime(value)\n- Splitting strings: split(source, delimiter [, requestedIndex])\n\nDo NOT:\n- Name columns any of the following 'date', 'time'\n\nExample:\n\n[INPUT]\n127.0.0.1 200 GET /index.htm\n127.0.0.1 200 GET /index.htm\n127.0.0.1 200 GET /index.htm\n127.0.0.1 200 GET /index.htm\n[END INPUT]\n\n[KQL]\ndatatable (message:string) [\n    '127.0.0.1 200 GET /index.htm',\n    '127.0.0.1 200 GET /index.htm',\n    '127.0.0.1 200 GET /index.htm',\n    '127.0.0.1 200 GET /index.htm',\n]\n| project \n    ip = split(message,\" \")[0],\n    httpResultCode = split(message,\" \")[1],\n    httpMethod = split(message,\" \")[2] ,\n    doc = split(message,\" \")[3]\n[END KQL]\n\n[INPUT]\nJun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4 \nJun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown\nJun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4 \nJun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\n\n[END INPUT]\n\n[KQL]"
                       }
                     ]
                   },
                   "output": {
-                    "id": "chatcmpl-9K4AM7SvBUy6IPhmOgRCwpsRC34DX",
+                    "id": "chatcmpl-9K6OHRQKEq6MhYgEUEwAqAle4W4Z1",
                     "choices": [
                       {
                         "finish_reason": "stop",
                         "index": 0,
                         "logprobs": null,
                         "message": {
-                          "content": "datatable (message:string) [\n    'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root'\n]\n| project \n    logDate = todatetime(strcat(split(message,\" \")[0], \" \", split(message,\" \")[1], \" \", split(message,\" \")[2], \" \", split(message,\" \")[3])),\n    ipAddress = split(split(message,\" \")[12], \"=\")[1],\n    logMessage = strcat(split(message,\" \")[5], \" \", split(message,\" \")[6])\n[END KQL]",
+                          "content": "datatable (message:string) [\n    'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root'\n]\n| project \n    logDate = todatetime(strcat(split(message,\" \")[0], \" \", split(message,\" \")[1], \" \", split(message,\" \")[2], \" \", split(message,\" \")[3])),\n    logMessage = strcat(split(message,\": \")[1], split(message,\": \")[2]),\n    ipAddress = split(split(message,\" \")[-1], \" \")[0],\n    user = split(split(message,\" \")[-1], \" \")[1]\n[END KQL]",
                           "role": "assistant",
                           "function_call": null,
                           "tool_calls": null
                         }
                       }
                     ],
-                    "created": 1714569602,
+                    "created": 1714578153,
                     "model": "gpt-4",
                     "object": "chat.completion",
                     "system_fingerprint": null,
                     "usage": {
-                      "completion_tokens": 683,
-                      "prompt_tokens": 933,
-                      "total_tokens": 1616
+                      "completion_tokens": 699,
+                      "prompt_tokens": 954,
+                      "total_tokens": 1653
                     }
                   },
-                  "start_time": 1714569602.002535,
-                  "end_time": 1714569651.154839,
+                  "start_time": 1714578152.839124,
+                  "end_time": 1714578199.77718,
                   "error": null,
                   "children": [],
                   "node_name": null,
-                  "parent_id": "3583cb2c-78c7-4615-9718-8ae6edc9fcc3",
-                  "id": "87d58d6d-93d0-4aff-a3b2-3a29d24911ca",
+                  "parent_id": "c63d4ad6-6f35-407f-afb7-e3364faa5221",
+                  "id": "fd937281-d53f-4018-8298-245de1baff89",
                   "function": "openai.resources.chat.completions.AsyncCompletions.create",
                   "system_metrics": {
-                    "completion_tokens": 683,
-                    "prompt_tokens": 933,
-                    "total_tokens": 1616
+                    "completion_tokens": 699,
+                    "prompt_tokens": 954,
+                    "total_tokens": 1653
                   }
                 }
               ],
               "node_name": "logToKql",
               "parent_id": "",
-              "id": "3583cb2c-78c7-4615-9718-8ae6edc9fcc3",
+              "id": "c63d4ad6-6f35-407f-afb7-e3364faa5221",
               "function": "kql_generator_tool",
               "system_metrics": {
-                "completion_tokens": 776,
-                "prompt_tokens": 1790,
-                "total_tokens": 2566
+                "completion_tokens": 831,
+                "prompt_tokens": 1861,
+                "total_tokens": 2692
               }
             }
           ],
           "system_metrics": {
-            "duration": 62.78895,
-            "prompt_tokens": 1790,
-            "completion_tokens": 776,
-            "total_tokens": 2566
+            "duration": 67.134255,
+            "prompt_tokens": 1861,
+            "completion_tokens": 831,
+            "total_tokens": 2692
           },
           "inputs": {
             "input_file": "./_data_in/apache.log"
           },
           "output": {
-            "KQL": "datatable (message:string) [\n    'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root'\n]\n| project \n    logDate = todatetime(strcat(split(message,\" \")[0], \" \", split(message,\" \")[1], \" \", split(message,\" \")[2], \" \", split(message,\" \")[3])),\n    ipAddress = split(split(message,\" \")[12], \"=\")[1],\n    logMessage = strcat(split(message,\" \")[5], \" \", split(message,\" \")[6])\n[END KQL]"
+            "KQL": "datatable (message:string) [\n    'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root'\n]\n| project \n    logDate = todatetime(strcat(split(message,\" \")[0], \" \", split(message,\" \")[1], \" \", split(message,\" \")[2], \" \", split(message,\" \")[3])),\n    logMessage = strcat(split(message,\": \")[1], split(message,\": \")[2]),\n    ipAddress = split(split(message,\" \")[-1], \" \")[0],\n    user = split(split(message,\" \")[-1], \" \")[1]\n"
           },
           "error": null
         }
@@ -187,34 +187,34 @@
       "description": "",
       "tags": null,
       "system_metrics": {
-        "duration": 62.78895,
-        "prompt_tokens": 1790,
-        "completion_tokens": 776,
-        "total_tokens": 2566
+        "duration": 67.134255,
+        "prompt_tokens": 1861,
+        "completion_tokens": 831,
+        "total_tokens": 2692
       },
       "result": {
-        "KQL": "datatable (message:string) [\n    'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root'\n]\n| project \n    logDate = todatetime(strcat(split(message,\" \")[0], \" \", split(message,\" \")[1], \" \", split(message,\" \")[2], \" \", split(message,\" \")[3])),\n    ipAddress = split(split(message,\" \")[12], \"=\")[1],\n    logMessage = strcat(split(message,\" \")[5], \" \", split(message,\" \")[6])\n[END KQL]"
+        "KQL": "datatable (message:string) [\n    'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root'\n]\n| project \n    logDate = todatetime(strcat(split(message,\" \")[0], \" \", split(message,\" \")[1], \" \", split(message,\" \")[2], \" \", split(message,\" \")[3])),\n    logMessage = strcat(split(message,\": \")[1], split(message,\": \")[2]),\n    ipAddress = split(split(message,\" \")[-1], \" \")[0],\n    user = split(split(message,\" \")[-1], \" \")[1]\n"
       },
       "upload_metrics": false,
-      "otel_trace_id": "0x4f34e495fcddb43300d062b3e2589831",
+      "otel_trace_id": "0x245c9881e313967187c17fb310ff8b80",
       "message_format": "basic"
     }
   ],
   "node_runs": [
     {
       "node": "logToKql",
-      "flow_run_id": "03a9e5e5-c286-4a6b-96f1-51a5615f4a51",
-      "run_id": "03a9e5e5-c286-4a6b-96f1-51a5615f4a51_logToKql_0",
+      "flow_run_id": "75f7c2cb-728b-4823-af17-c8064387b1a3",
+      "run_id": "75f7c2cb-728b-4823-af17-c8064387b1a3_logToKql_0",
       "status": "Completed",
       "inputs": {
         "input": "./_data_in/apache.log"
       },
-      "output": "datatable (message:string) [\n    'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root'\n]\n| project \n    logDate = todatetime(strcat(split(message,\" \")[0], \" \", split(message,\" \")[1], \" \", split(message,\" \")[2], \" \", split(message,\" \")[3])),\n    ipAddress = split(split(message,\" \")[12], \"=\")[1],\n    logMessage = strcat(split(message,\" \")[5], \" \", split(message,\" \")[6])\n[END KQL]",
+      "output": "datatable (message:string) [\n    'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root'\n]\n| project \n    logDate = todatetime(strcat(split(message,\" \")[0], \" \", split(message,\" \")[1], \" \", split(message,\" \")[2], \" \", split(message,\" \")[3])),\n    logMessage = strcat(split(message,\": \")[1], split(message,\": \")[2]),\n    ipAddress = split(split(message,\" \")[-1], \" \")[0],\n    user = split(split(message,\" \")[-1], \" \")[1]\n",
       "metrics": null,
       "error": null,
-      "parent_run_id": "03a9e5e5-c286-4a6b-96f1-51a5615f4a51_0",
-      "start_time": "2024-05-01T13:19:48.373107Z",
-      "end_time": "2024-05-01T13:20:51.158360Z",
+      "parent_run_id": "75f7c2cb-728b-4823-af17-c8064387b1a3_0",
+      "start_time": "2024-05-01T15:42:13.949214Z",
+      "end_time": "2024-05-01T15:43:21.052753Z",
       "index": 0,
       "api_calls": [
         {
@@ -223,9 +223,9 @@
           "inputs": {
             "input": "./_data_in/apache.log"
           },
-          "output": "datatable (message:string) [\n    'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root'\n]\n| project \n    logDate = todatetime(strcat(split(message,\" \")[0], \" \", split(message,\" \")[1], \" \", split(message,\" \")[2], \" \", split(message,\" \")[3])),\n    ipAddress = split(split(message,\" \")[12], \"=\")[1],\n    logMessage = strcat(split(message,\" \")[5], \" \", split(message,\" \")[6])\n[END KQL]",
-          "start_time": 1714569588.373222,
-          "end_time": 1714569651.157547,
+          "output": "datatable (message:string) [\n    'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root'\n]\n| project \n    logDate = todatetime(strcat(split(message,\" \")[0], \" \", split(message,\" \")[1], \" \", split(message,\" \")[2], \" \", split(message,\" \")[3])),\n    logMessage = strcat(split(message,\": \")[1], split(message,\": \")[2]),\n    ipAddress = split(split(message,\" \")[-1], \" \")[0],\n    user = split(split(message,\" \")[-1], \" \")[1]\n",
+          "start_time": 1714578133.950027,
+          "end_time": 1714578201.046298,
           "error": null,
           "children": [
             {
@@ -244,47 +244,47 @@
                 "messages": [
                   {
                     "role": "user",
-                    "content": "Create an XML plan step by step, to satisfy the goal given, with the available functions.\n\n[AVAILABLE FUNCTIONS]\n\nFileSystem-ReadFileHead:\n  description: Reads the first lines of a file\n  inputs:\n    - filename: The filename of the file to read\n\nextraction-extract_fields:\n  description: Create KQL that demonstrates extracting fields from a line in a logfile\n  inputs:\n    - input: \n\n[END AVAILABLE FUNCTIONS]\n\nTo create a plan, follow these steps:\n0. The plan should be as short as possible.\n1. From a <goal> create a <plan> as a series of <functions>.\n2. A plan has 'INPUT' available in context variables by default.\n3. Before using any function in a plan, check that it is present in the [AVAILABLE FUNCTIONS] list. If it is not, do not use it.\n4. Only use functions that are required for the given goal.\n5. Append an \"END\" XML comment at the end of the plan after the final closing </plan> tag.\n6. Always output valid XML that can be parsed by an XML parser.\n7. If a plan cannot be created with the [AVAILABLE FUNCTIONS], return <plan />.\n\nAll plans take the form of:\n<plan>\n    <!-- ... reason for taking step ... -->\n    <function.{FullyQualifiedFunctionName} ... />\n    <!-- ... reason for taking step ... -->\n    <function.{FullyQualifiedFunctionName} ... />\n    <!-- ... reason for taking step ... -->\n    <function.{FullyQualifiedFunctionName} ... />\n    (... etc ...)\n</plan>\n<!-- END -->\n\nTo call a function, follow these steps:\n1. A function has one or more named parameters and a single 'output' which are all strings. Parameter values should be xml escaped.\n2. To save an 'output' from a <function>, to pass into a future <function>, use <function.{FullyQualifiedFunctionName} ... setContextVariable=\"<UNIQUE_VARIABLE_KEY>\"/>\n3. To save an 'output' from a <function>, to return as part of a plan result, use <function.{FullyQualifiedFunctionName} ... appendToResult=\"RESULT__<UNIQUE_RESULT_KEY>\"/>\n4. Use a '$' to reference a context variable in a parameter, e.g. when `INPUT='world'` the parameter 'Hello $INPUT' will evaluate to `Hello world`.\n5. Functions do not have access to the context variables of other functions. Do not attempt to use context variables as arrays or objects. Instead, use available functions to extract specific elements or properties from context variables.\n\nDO NOT DO THIS, THE PARAMETER VALUE IS NOT XML ESCAPED:\n<function.Plugin-Name4 input=\"$SOME_PREVIOUS_OUTPUT\" parameter_name=\"some value with a <!-- 'comment' in it-->\"/>\n\nDO NOT DO THIS, THE PARAMETER VALUE IS ATTEMPTING TO USE A CONTEXT VARIABLE AS AN ARRAY/OBJECT:\n<function.Plugin-CallFunction input=\"$OTHER_OUTPUT[1]\"/>\n\nDO NOT DO THIS, THE FUNCTION NAME IS NOT A FULLY QUALIFIED FUNCTION NAME:\n<function.CallFunction input=\"world\"/>\n\nHere is a valid example of how to call a function \"_plugin-Function_Name\" with a single input and save its output:\n<function._plugin-Function_Name input=\"this is my input\" setContextVariable=\"SOME_KEY\"/>\n\nHere is a valid example of how to call a function \"Plugin-FunctionName2\" with a single input and return its output as part of the plan result:\n<function.Plugin-FunctionName2 input=\"Hello $INPUT\" appendToResult=\"RESULT__FINAL_ANSWER\"/>\n\nHere is a valid example of how to call a function \"Name3\" with multiple inputs:\n<function.Plugin-Name3 input=\"$SOME_PREVIOUS_OUTPUT\" parameter_name=\"some value with a &lt;!-- &apos;comment&apos; in it--&gt;\"/>\n\nBegin!\n\n<goal>Use the available plugins to: 1 - read the beginning of the log file and 2 - write a KQL query that extracts fields from the log: ./_data_in/apache.log</goal>"
+                    "content": "Create an XML plan step by step, to satisfy the goal given, with the available functions.\n\n[AVAILABLE FUNCTIONS]\n\nazure_monitor-ExecuteKQL:\n  description: Executes a KQL against an Azure Monitor workspace\n  inputs:\n    - kql_query: The KQL query to execute\n\nfile_system-ReadFileHead:\n  description: Reads the first lines of a file\n  inputs:\n    - filename: The filename of the file to read\n\nextraction-extract_fields:\n  description: Create KQL that demonstrates extracting fields from a line in a logfile\n  inputs:\n    - input: \n\n[END AVAILABLE FUNCTIONS]\n\nTo create a plan, follow these steps:\n0. The plan should be as short as possible.\n1. From a <goal> create a <plan> as a series of <functions>.\n2. A plan has 'INPUT' available in context variables by default.\n3. Before using any function in a plan, check that it is present in the [AVAILABLE FUNCTIONS] list. If it is not, do not use it.\n4. Only use functions that are required for the given goal.\n5. Append an \"END\" XML comment at the end of the plan after the final closing </plan> tag.\n6. Always output valid XML that can be parsed by an XML parser.\n7. If a plan cannot be created with the [AVAILABLE FUNCTIONS], return <plan />.\n\nAll plans take the form of:\n<plan>\n    <!-- ... reason for taking step ... -->\n    <function.{FullyQualifiedFunctionName} ... />\n    <!-- ... reason for taking step ... -->\n    <function.{FullyQualifiedFunctionName} ... />\n    <!-- ... reason for taking step ... -->\n    <function.{FullyQualifiedFunctionName} ... />\n    (... etc ...)\n</plan>\n<!-- END -->\n\nTo call a function, follow these steps:\n1. A function has one or more named parameters and a single 'output' which are all strings. Parameter values should be xml escaped.\n2. To save an 'output' from a <function>, to pass into a future <function>, use <function.{FullyQualifiedFunctionName} ... setContextVariable=\"<UNIQUE_VARIABLE_KEY>\"/>\n3. To save an 'output' from a <function>, to return as part of a plan result, use <function.{FullyQualifiedFunctionName} ... appendToResult=\"RESULT__<UNIQUE_RESULT_KEY>\"/>\n4. Use a '$' to reference a context variable in a parameter, e.g. when `INPUT='world'` the parameter 'Hello $INPUT' will evaluate to `Hello world`.\n5. Functions do not have access to the context variables of other functions. Do not attempt to use context variables as arrays or objects. Instead, use available functions to extract specific elements or properties from context variables.\n\nDO NOT DO THIS, THE PARAMETER VALUE IS NOT XML ESCAPED:\n<function.Plugin-Name4 input=\"$SOME_PREVIOUS_OUTPUT\" parameter_name=\"some value with a <!-- 'comment' in it-->\"/>\n\nDO NOT DO THIS, THE PARAMETER VALUE IS ATTEMPTING TO USE A CONTEXT VARIABLE AS AN ARRAY/OBJECT:\n<function.Plugin-CallFunction input=\"$OTHER_OUTPUT[1]\"/>\n\nDO NOT DO THIS, THE FUNCTION NAME IS NOT A FULLY QUALIFIED FUNCTION NAME:\n<function.CallFunction input=\"world\"/>\n\nHere is a valid example of how to call a function \"_plugin-Function_Name\" with a single input and save its output:\n<function._plugin-Function_Name input=\"this is my input\" setContextVariable=\"SOME_KEY\"/>\n\nHere is a valid example of how to call a function \"Plugin-FunctionName2\" with a single input and return its output as part of the plan result:\n<function.Plugin-FunctionName2 input=\"Hello $INPUT\" appendToResult=\"RESULT__FINAL_ANSWER\"/>\n\nHere is a valid example of how to call a function \"Name3\" with multiple inputs:\n<function.Plugin-Name3 input=\"$SOME_PREVIOUS_OUTPUT\" parameter_name=\"some value with a &lt;!-- &apos;comment&apos; in it--&gt;\"/>\n\nBegin!\n\n<goal>Use the available plugins to: \n\n1 - read the beginning of the log file and \n2 - write a KQL query that extracts fields from the log\n3 - execute the KQL query against the Azure Monitor workspace\n\n./_data_in/apache.log</goal>"
                   }
                 ]
               },
               "output": {
-                "id": "chatcmpl-9K4A96Se6PBtcPOtsY9PJfACynH5o",
+                "id": "chatcmpl-9K6NzH2GYd7WDX8onyEaHwxc7Rm5O",
                 "choices": [
                   {
                     "finish_reason": "stop",
                     "index": 0,
                     "logprobs": null,
                     "message": {
-                      "content": "<plan>\n    <!-- First, we need to read the beginning of the log file -->\n    <function.FileSystem-ReadFileHead filename=\"./_data_in/apache.log\" setContextVariable=\"LOG_HEAD\"/>\n    <!-- Then, we use the extracted log head to create a KQL query that extracts fields from the log -->\n    <function.extraction-extract_fields input=\"$LOG_HEAD\" appendToResult=\"RESULT__KQL_QUERY\"/>\n</plan>\n<!-- END -->",
+                      "content": "<plan>\n    <!-- Step 1: Read the beginning of the log file -->\n    <function.file_system-ReadFileHead filename=\"./_data_in/apache.log\" setContextVariable=\"LOG_HEAD\"/>\n    \n    <!-- Step 2: Write a KQL query that extracts fields from the log -->\n    <function.extraction-extract_fields input=\"$LOG_HEAD\" setContextVariable=\"KQL_QUERY\"/>\n    \n    <!-- Step 3: Execute the KQL query against the Azure Monitor workspace -->\n    <function.azure_monitor-ExecuteKQL kql_query=\"$KQL_QUERY\" appendToResult=\"RESULT__QUERY_EXECUTION\"/>\n</plan>\n<!-- END -->",
                       "role": "assistant",
                       "function_call": null,
                       "tool_calls": null
                     }
                   }
                 ],
-                "created": 1714569589,
+                "created": 1714578135,
                 "model": "gpt-4",
                 "object": "chat.completion",
                 "system_fingerprint": null,
                 "usage": {
-                  "completion_tokens": 93,
-                  "prompt_tokens": 857,
-                  "total_tokens": 950
+                  "completion_tokens": 132,
+                  "prompt_tokens": 907,
+                  "total_tokens": 1039
                 }
               },
-              "start_time": 1714569588.452641,
-              "end_time": 1714569601.99684,
+              "start_time": 1714578134.290792,
+              "end_time": 1714578152.830848,
               "error": null,
               "children": [],
               "node_name": null,
-              "parent_id": "3583cb2c-78c7-4615-9718-8ae6edc9fcc3",
-              "id": "808eed75-27f4-4399-9f1c-fc21a14f298c",
+              "parent_id": "c63d4ad6-6f35-407f-afb7-e3364faa5221",
+              "id": "b42ba9d2-131b-4f14-8b16-6a84462ea86b",
               "function": "openai.resources.chat.completions.AsyncCompletions.create",
               "system_metrics": {
-                "completion_tokens": 93,
-                "prompt_tokens": 857,
-                "total_tokens": 950
+                "completion_tokens": 132,
+                "prompt_tokens": 907,
+                "total_tokens": 1039
               }
             },
             {
@@ -298,79 +298,79 @@
                 "n": 1,
                 "presence_penalty": 0.0,
                 "stream": false,
-                "temperature": 0.0,
-                "top_p": 0.0,
+                "temperature": 0.5,
+                "top_p": 0.2,
                 "messages": [
                   {
                     "role": "user",
-                    "content": "Write a Kusto Query Language (KQL) query that extracts all the fields from the loglines below. \n\nFields could be:\n- IP Address e.g. 127.0.2.200\n- Date e.g. 'Jun 14 15:16:02'\n- Message e.g. 'authentication failure' or 'check pass; user unknown'\n- Response code e.g. 200 or 404\n\n\nRelevant KQL functions syntax:\n- Joining strings (concatenation): strcat(argument1, argument2 [, argument3 ... ])\n- Datetime parsing: todatetime(value)\n- Splitting strings: split(source, delimiter [, requestedIndex])\n\nDo NOT:\n- Name columns any of the following 'date', 'time'\n\n\nExample:\n\n[INPUT]\n127.0.0.1 200 GET /index.htm\n127.0.0.1 200 GET /index.htm\n127.0.0.1 200 GET /index.htm\n127.0.0.1 200 GET /index.htm\n[END INPUT]\n\n[KQL]\ndatatable (message:string) [\n    '127.0.0.1 200 GET /index.htm',\n    '127.0.0.1 200 GET /index.htm',\n    '127.0.0.1 200 GET /index.htm',\n    '127.0.0.1 200 GET /index.htm',\n]\n| project \n    ip = split(message,\" \")[0],\n    httpResultCode = split(message,\" \")[1],\n    httpMethod = split(message,\" \")[2] ,\n    doc = split(message,\" \")[3]\n[END KQL]\n\n\n[INPUT]\nJun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4 \nJun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown\nJun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4 \nJun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\n\n[END INPUT]\n\n[KQL]"
+                    "content": "Write a Kusto Query Language (KQL) query that extracts all the fields from the loglines below. \n\nFields could be:\n- IP Address e.g. 127.0.2.200 or 218.188.2.4\n- Date e.g. 'Jun 14 15:16:02'\n- Message e.g. 'authentication failure' or 'check pass; user unknown'\n- Response code e.g. 200 or 404\n- User e.g. 'root' or 'admin'\n\nRelevant KQL functions syntax:\n- Joining strings (concatenation): strcat(argument1, argument2 [, argument3 ... ])\n- Datetime parsing: todatetime(value)\n- Splitting strings: split(source, delimiter [, requestedIndex])\n\nDo NOT:\n- Name columns any of the following 'date', 'time'\n\nExample:\n\n[INPUT]\n127.0.0.1 200 GET /index.htm\n127.0.0.1 200 GET /index.htm\n127.0.0.1 200 GET /index.htm\n127.0.0.1 200 GET /index.htm\n[END INPUT]\n\n[KQL]\ndatatable (message:string) [\n    '127.0.0.1 200 GET /index.htm',\n    '127.0.0.1 200 GET /index.htm',\n    '127.0.0.1 200 GET /index.htm',\n    '127.0.0.1 200 GET /index.htm',\n]\n| project \n    ip = split(message,\" \")[0],\n    httpResultCode = split(message,\" \")[1],\n    httpMethod = split(message,\" \")[2] ,\n    doc = split(message,\" \")[3]\n[END KQL]\n\n[INPUT]\nJun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4 \nJun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown\nJun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4 \nJun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\nJun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root\n\n[END INPUT]\n\n[KQL]"
                   }
                 ]
               },
               "output": {
-                "id": "chatcmpl-9K4AM7SvBUy6IPhmOgRCwpsRC34DX",
+                "id": "chatcmpl-9K6OHRQKEq6MhYgEUEwAqAle4W4Z1",
                 "choices": [
                   {
                     "finish_reason": "stop",
                     "index": 0,
                     "logprobs": null,
                     "message": {
-                      "content": "datatable (message:string) [\n    'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root'\n]\n| project \n    logDate = todatetime(strcat(split(message,\" \")[0], \" \", split(message,\" \")[1], \" \", split(message,\" \")[2], \" \", split(message,\" \")[3])),\n    ipAddress = split(split(message,\" \")[12], \"=\")[1],\n    logMessage = strcat(split(message,\" \")[5], \" \", split(message,\" \")[6])\n[END KQL]",
+                      "content": "datatable (message:string) [\n    'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root'\n]\n| project \n    logDate = todatetime(strcat(split(message,\" \")[0], \" \", split(message,\" \")[1], \" \", split(message,\" \")[2], \" \", split(message,\" \")[3])),\n    logMessage = strcat(split(message,\": \")[1], split(message,\": \")[2]),\n    ipAddress = split(split(message,\" \")[-1], \" \")[0],\n    user = split(split(message,\" \")[-1], \" \")[1]\n[END KQL]",
                       "role": "assistant",
                       "function_call": null,
                       "tool_calls": null
                     }
                   }
                 ],
-                "created": 1714569602,
+                "created": 1714578153,
                 "model": "gpt-4",
                 "object": "chat.completion",
                 "system_fingerprint": null,
                 "usage": {
-                  "completion_tokens": 683,
-                  "prompt_tokens": 933,
-                  "total_tokens": 1616
+                  "completion_tokens": 699,
+                  "prompt_tokens": 954,
+                  "total_tokens": 1653
                 }
               },
-              "start_time": 1714569602.002535,
-              "end_time": 1714569651.154839,
+              "start_time": 1714578152.839124,
+              "end_time": 1714578199.77718,
               "error": null,
               "children": [],
               "node_name": null,
-              "parent_id": "3583cb2c-78c7-4615-9718-8ae6edc9fcc3",
-              "id": "87d58d6d-93d0-4aff-a3b2-3a29d24911ca",
+              "parent_id": "c63d4ad6-6f35-407f-afb7-e3364faa5221",
+              "id": "fd937281-d53f-4018-8298-245de1baff89",
               "function": "openai.resources.chat.completions.AsyncCompletions.create",
               "system_metrics": {
-                "completion_tokens": 683,
-                "prompt_tokens": 933,
-                "total_tokens": 1616
+                "completion_tokens": 699,
+                "prompt_tokens": 954,
+                "total_tokens": 1653
               }
             }
           ],
           "node_name": "logToKql",
           "parent_id": "",
-          "id": "3583cb2c-78c7-4615-9718-8ae6edc9fcc3",
+          "id": "c63d4ad6-6f35-407f-afb7-e3364faa5221",
           "function": "kql_generator_tool",
           "system_metrics": {
-            "completion_tokens": 776,
-            "prompt_tokens": 1790,
-            "total_tokens": 2566
+            "completion_tokens": 831,
+            "prompt_tokens": 1861,
+            "total_tokens": 2692
           }
         }
       ],
       "cached_run_id": null,
       "cached_flow_run_id": null,
       "logs": {
-        "stdout": "[2024-05-01T13:20:51+0000] Function: FileSystem.ReadFileHead\n[2024-05-01T13:20:51+0000] Input vars: {'filename': './_data_in/apache.log'}\n[2024-05-01T13:20:51+0000] Output vars: ['LOG_HEAD']\n[2024-05-01T13:20:51+0000] Function: extraction.extract_fields\n[2024-05-01T13:20:51+0000] Input vars: {'input': '$LOG_HEAD'}\n[2024-05-01T13:20:51+0000] Output vars: ['RESULT__KQL_QUERY']\n[2024-05-01T13:20:51+0000] Result: datatable (message:string) [\n    'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root'\n]\n| project \n    logDate = todatetime(strcat(split(message,\" \")[0], \" \", split(message,\" \")[1], \" \", split(message,\" \")[2], \" \", split(message,\" \")[3])),\n    ipAddress = split(split(message,\" \")[12], \"=\")[1],\n    logMessage = strcat(split(message,\" \")[5], \" \", split(message,\" \")[6])\n[END KQL]\n",
+        "stdout": "[2024-05-01T15:43:21+0000] Function: file_system.ReadFileHead\n[2024-05-01T15:43:21+0000] Input vars: {'filename': './_data_in/apache.log'}\n[2024-05-01T15:43:21+0000] Output vars: ['LOG_HEAD']\n[2024-05-01T15:43:21+0000] Function: extraction.extract_fields\n[2024-05-01T15:43:21+0000] Input vars: {'input': '$LOG_HEAD'}\n[2024-05-01T15:43:21+0000] Output vars: ['KQL_QUERY']\n[2024-05-01T15:43:21+0000] Function: azure_monitor.ExecuteKQL\n[2024-05-01T15:43:21+0000] Input vars: {'kql_query': '$KQL_QUERY'}\n[2024-05-01T15:43:21+0000] Output vars: ['RESULT__QUERY_EXECUTION']\n[2024-05-01T15:43:21+0000] Result: datatable (message:string) [\n    'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root'\n]\n| project \n    logDate = todatetime(strcat(split(message,\" \")[0], \" \", split(message,\" \")[1], \" \", split(message,\" \")[2], \" \", split(message,\" \")[3])),\n    logMessage = strcat(split(message,\": \")[1], split(message,\": \")[2]),\n    ipAddress = split(split(message,\" \")[-1], \" \")[0],\n    user = split(split(message,\" \")[-1], \" \")[1]\n\n",
         "stderr": ""
       },
       "system_metrics": {
-        "completion_tokens": 776,
-        "prompt_tokens": 1790,
-        "total_tokens": 2566,
-        "duration": 62.785253
+        "completion_tokens": 831,
+        "prompt_tokens": 1861,
+        "total_tokens": 2692,
+        "duration": 67.103539
       },
-      "result": "datatable (message:string) [\n    'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root'\n]\n| project \n    logDate = todatetime(strcat(split(message,\" \")[0], \" \", split(message,\" \")[1], \" \", split(message,\" \")[2], \" \", split(message,\" \")[3])),\n    ipAddress = split(split(message,\" \")[12], \"=\")[1],\n    logMessage = strcat(split(message,\" \")[5], \" \", split(message,\" \")[6])\n[END KQL]",
+      "result": "datatable (message:string) [\n    'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',\n    'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20882]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20884]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20883]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20885]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20886]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20892]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root',\n    'Jun 15 2024 02:04:59 combo sshd(pam_unix)[20893]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=220-135-151-1.hinet-ip.hinet.net  user=root'\n]\n| project \n    logDate = todatetime(strcat(split(message,\" \")[0], \" \", split(message,\" \")[1], \" \", split(message,\" \")[2], \" \", split(message,\" \")[3])),\n    logMessage = strcat(split(message,\": \")[1], split(message,\": \")[2]),\n    ipAddress = split(split(message,\" \")[-1], \" \")[0],\n    user = split(split(message,\" \")[-1], \" \")[1]\n",
       "message_format": "basic"
     }
   ]

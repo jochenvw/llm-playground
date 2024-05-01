@@ -22,6 +22,7 @@ Therefore - I'm **not** using vritual environments for now.
 - VSCode
 - DevContainer extension installed (requires docker and perhaps WSL2)
 - Azure subscription
+- Azure CLI: `curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash`
 
 ## Setting up your environment
 

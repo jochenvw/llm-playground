@@ -1,0 +1,6 @@
+Use the available plugins to: 
+
+1 - read the beginning of the log file and 
+2 - write a KQL query that extracts fields from the log
+3 - execute the KQL query against the Azure Monitor workspace
+

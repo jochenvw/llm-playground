@@ -38,7 +38,6 @@ datatable (message:string) [
     doc = split(message," ")[3]
 [END KQL]
 
-
 [INPUT]
 {{$input}}
 [END INPUT]

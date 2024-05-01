@@ -1,13 +1,16 @@
-2024-05-01 13:19:48 +0000   42097 execution.flow     INFO     Start executing nodes in async mode.
-2024-05-01 13:19:48 +0000   42097 execution.flow     INFO     Start to run 1 nodes with the current event loop.
-2024-05-01 13:19:48 +0000   42097 execution.flow     INFO     Executing node logToKql. node run id: 03a9e5e5-c286-4a6b-96f1-51a5615f4a51_logToKql_0
-2024-05-01 13:20:51 +0000   42097 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Function: FileSystem.ReadFileHead
-2024-05-01 13:20:51 +0000   42097 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Input vars: {'filename': './_data_in/apache.log'}
-2024-05-01 13:20:51 +0000   42097 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Output vars: ['LOG_HEAD']
-2024-05-01 13:20:51 +0000   42097 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Function: extraction.extract_fields
-2024-05-01 13:20:51 +0000   42097 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Input vars: {'input': '$LOG_HEAD'}
-2024-05-01 13:20:51 +0000   42097 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Output vars: ['RESULT__KQL_QUERY']
-2024-05-01 13:20:51 +0000   42097 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Result: datatable (message:string) [
+2024-05-01 15:42:13 +0000   73308 execution.flow     INFO     Start executing nodes in async mode.
+2024-05-01 15:42:13 +0000   73308 execution.flow     INFO     Start to run 1 nodes with the current event loop.
+2024-05-01 15:42:13 +0000   73308 execution.flow     INFO     Executing node logToKql. node run id: 75f7c2cb-728b-4823-af17-c8064387b1a3_logToKql_0
+2024-05-01 15:43:21 +0000   73308 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Function: file_system.ReadFileHead
+2024-05-01 15:43:21 +0000   73308 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Input vars: {'filename': './_data_in/apache.log'}
+2024-05-01 15:43:21 +0000   73308 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Output vars: ['LOG_HEAD']
+2024-05-01 15:43:21 +0000   73308 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Function: extraction.extract_fields
+2024-05-01 15:43:21 +0000   73308 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Input vars: {'input': '$LOG_HEAD'}
+2024-05-01 15:43:21 +0000   73308 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Output vars: ['KQL_QUERY']
+2024-05-01 15:43:21 +0000   73308 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Function: azure_monitor.ExecuteKQL
+2024-05-01 15:43:21 +0000   73308 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Input vars: {'kql_query': '$KQL_QUERY'}
+2024-05-01 15:43:21 +0000   73308 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Output vars: ['RESULT__QUERY_EXECUTION']
+2024-05-01 15:43:21 +0000   73308 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Result: datatable (message:string) [
     'Jun 14 2024 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',
     'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: check pass; user unknown',
     'Jun 14 2024 15:16:02 combo sshd(pam_unix)[19937]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4',
@@ -21,7 +24,7 @@
 ]
 | project 
     logDate = todatetime(strcat(split(message," ")[0], " ", split(message," ")[1], " ", split(message," ")[2], " ", split(message," ")[3])),
-    ipAddress = split(split(message," ")[12], "=")[1],
-    logMessage = strcat(split(message," ")[5], " ", split(message," ")[6])
-[END KQL]
-2024-05-01 13:20:51 +0000   42097 execution.flow     INFO     Node logToKql completes.
+    logMessage = strcat(split(message,": ")[1], split(message,": ")[2]),
+    ipAddress = split(split(message," ")[-1], " ")[0],
+    user = split(split(message," ")[-1], " ")[1]
+2024-05-01 15:43:21 +0000   73308 execution.flow     INFO     Node logToKql completes.

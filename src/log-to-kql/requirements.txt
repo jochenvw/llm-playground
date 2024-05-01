@@ -2,3 +2,5 @@ semantic-kernel
 promptflow 
 promptflow-tools
 python-dotenv
+azure-monitor-query
+azure.identity
