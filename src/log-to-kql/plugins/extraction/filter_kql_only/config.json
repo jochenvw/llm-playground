@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "description": "Create KQL that demonstrates extracting fields from a line in a logfile",
+  "description": "Filters out all text that is not KQL and returns KQL syntax exclusively",
   "execution_settings": {
     "default": {
       "max_tokens": 2048,
@@ -13,7 +13,7 @@
   "input_variables": [
     {
       "name": "input",
-      "description": "Loglines to extract fields from",
+      "description": "Input with text containing KQL and text",
       "default": ""
     }
   ]

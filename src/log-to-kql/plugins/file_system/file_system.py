@@ -20,3 +20,16 @@ class FileSystem:
                 result += f.readline()
                 
         return result
+
+    @kernel_function(
+        description="Writes content to a file",
+        name="WriteFile",
+    )    
+    def WriteFile(
+        self, 
+        filename: Annotated[str, "The filename of the file to write"],
+        content: Annotated[str, "The content to write to the file"]
+    ) -> Annotated[bool, "Success indicator - true is success"]:
+        with open(filename, "w") as f:
+            f.write(content)
+        return True

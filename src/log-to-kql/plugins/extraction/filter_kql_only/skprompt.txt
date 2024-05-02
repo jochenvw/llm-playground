@@ -1,0 +1,8 @@
+Filter out anything that is NOT KQL syntax in the following input. 
+You must respond with ONLY the KQL part and nothing more.
+
+Remove any markdown, code blocks, or anything that is not KQL syntax.
+
+
+Input:
+{{$input}}

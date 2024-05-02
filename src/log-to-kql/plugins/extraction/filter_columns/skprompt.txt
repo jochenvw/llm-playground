@@ -1,0 +1,9 @@
+Filter the KQL query and ensure the query output ONLY has specific columns.
+
+Columns to include:
+{{$columns_to_include}}
+
+KQL Query:
+{{$kql_query}}
+
+You must ONLY respond with the output of the query. Do not include any other information in your response.

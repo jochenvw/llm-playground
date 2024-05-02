@@ -34,7 +34,6 @@ async def kql_generator_tool(input: str) -> str:
     with open("goal.txt", "r") as file:
         ask = file.read()
     
-    
     result = ""
     
     max_attempts = 5
