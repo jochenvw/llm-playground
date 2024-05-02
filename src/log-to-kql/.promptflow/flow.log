@@ -1,3 +1,23 @@
 2024-05-02 15:19:47 +0000    7924 execution.flow     INFO     Start executing nodes in async mode.
 2024-05-02 15:19:47 +0000    7924 execution.flow     INFO     Start to run 1 nodes with the current event loop.
 2024-05-02 15:19:47 +0000    7924 execution.flow     INFO     Executing node logToKql. node run id: 5c2edf44-e5e0-4075-811d-44a7d753ebb2_logToKql_0
+2024-05-02 15:23:12 +0000    7924 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Function: file_system.ReadFileHead
+2024-05-02 15:23:12 +0000    7924 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Input vars: {'filename': '_data_in/apache.log'}
+2024-05-02 15:23:12 +0000    7924 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Output vars: ['LOG_HEAD']
+2024-05-02 15:23:12 +0000    7924 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Function: extraction.extract_fields
+2024-05-02 15:23:12 +0000    7924 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Input vars: {'input': '$LOG_HEAD'}
+2024-05-02 15:23:12 +0000    7924 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Output vars: ['KQL_QUERY']
+2024-05-02 15:23:12 +0000    7924 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Function: azure_monitor.ExecuteKQL
+2024-05-02 15:23:12 +0000    7924 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Input vars: {'kql_query': '$KQL_QUERY'}
+2024-05-02 15:23:12 +0000    7924 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Output vars: ['KQL_EXECUTION_RESULT']
+2024-05-02 15:23:12 +0000    7924 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Function: extraction.filter_columns
+2024-05-02 15:23:12 +0000    7924 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Input vars: {'columns_to_include': 'TimeGenerated,LogMessage,IPAddress', 'kql_query': '$KQL_EXECUTION_RESULT'}
+2024-05-02 15:23:12 +0000    7924 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Output vars: ['FILTERED_KQL_RESULT']
+2024-05-02 15:23:12 +0000    7924 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Function: extraction.filter_kql_only
+2024-05-02 15:23:12 +0000    7924 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Input vars: {'input': '$FILTERED_KQL_RESULT'}
+2024-05-02 15:23:12 +0000    7924 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Output vars: ['KQL_ONLY']
+2024-05-02 15:23:12 +0000    7924 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Function: file_system.WriteFile
+2024-05-02 15:23:12 +0000    7924 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Input vars: {'filename': '_data_in/apache_KQL.log', 'content': '$KQL_ONLY'}
+2024-05-02 15:23:12 +0000    7924 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Output vars: []
+2024-05-02 15:23:12 +0000    7924 execution.flow     INFO     [logToKql in line 0 (index starts from 0)] stdout> Result: True
+2024-05-02 15:23:12 +0000    7924 execution.flow     INFO     Node logToKql completes.

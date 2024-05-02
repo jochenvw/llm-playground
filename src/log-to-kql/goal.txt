@@ -8,3 +8,4 @@ Use the available plugins to:
  - 6. Write the KQL - and the KQL ONLY - to a file with the original file name and insert '_KQL' before the file extension part
  
  Log file: 
+
