@@ -15,11 +15,13 @@ Relevant KQL functions syntax:
  DO:
   - Output should have a `TimeGenerated` column of type `datetime`, if not present or inferred by default
   - Construct KQL queries with keywords coming from this list: print, extend, project, print, where, parse, project-away, project-rename, datatable, columnifexists, binary_and, binary_or, binary_not, binary_shift_left, binary_shift_right, binary_xor, tobool, todatetime, todouble/toreal, toguid, toint, tolong, tostring, totimespan, ago, datetime_add, datetime_diff, datetime_part, dayofmonth, dayofweek, dayofyear, endofday, endofmonth, endofweek, endofyear, getmonth, getyear, hourofday, make_datetime, make_timespan, now, startofday, startofmonth, startofweek, startofyear, todatetime, totimespan, weekofyear, array_concat, array_length, pack_array, pack, parse_json, parse_xml, zip, abs, bin/floor, ceiling, exp, exp10, exp2, isfinite, isinf, isnan, log, log10, log2, pow, round, sign, case, iif, max_of, min_of, base64_encodestring, base64_decodestring, countof, extract, extract_all, indexof, isempty, isnotempty, parse_json, replace, split, strcat, strcat_delim, strlen, substring, tolower, toupper, hash_sha256, gettype, isnotnull, isnull        
-
+  - Always use tostring() when using extract()
+  - Make sure you include the date AND the time fields when using todatetime()
+  
  DO NOT:
   - Use any KQL operators that act on multiple records
   - Name columns any of the following 'date', 'time'
-
+  - Use a previously defined column in a subsequent column definition
 
 Example:
 

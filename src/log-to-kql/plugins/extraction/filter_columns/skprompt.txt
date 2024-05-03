@@ -1,4 +1,4 @@
-Filter the KQL query and ensure the query output ONLY has specific columns.
+Tweak the KQL query to make sure the query output INCLUDES AT LEAST the indicated columns. Additional columns may also be included.
 
 Columns to include:
 {{$columns_to_include}}
@@ -6,4 +6,4 @@ Columns to include:
 KQL Query:
 {{$kql_query}}
 
-You must ONLY respond with the output of the query. Do not include any other information in your response.
+Your response should ONLY contain the query output. Exclude any extraneous information from your response.

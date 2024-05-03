@@ -1,0 +1,34 @@
+Format the input into a JSON file with that contains the following properties:
+
+Fields:
+- 'KQL Generated Time'
+- 'Source Filename'
+- 'KQL Query'
+- 'Status message'
+- 'Confidence score'
+
+Example:
+
+{
+    'KQL Generated Time': '2021-09-30T00:00:00Z',
+    'Source Filename': 'C:\\Users\\user\\Desktop\\test.txt',
+    'KQL Query': 'SecurityEvent | where EventID == 4624',
+    'Status message': 'Success',
+    'Confidence score': 0.9
+}
+
+[KQL_Query]
+{{$kql_query}}
+
+[SOURCE FILE]
+{{$source_file}}
+
+[date]
+{{$date}}
+
+[status_message]
+{{$status_message}}
+
+[probability score]
+{{$probability_score}}
+

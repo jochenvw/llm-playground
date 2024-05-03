@@ -3,9 +3,10 @@ Use the available plugins to:
  - 1. Read the beginning of the log file and 
  - 2. Generate a KQL query that extracts fields from the log
  - 3. Execute the KQL query against the Azure Monitor workspace to check validity
- - 4. Filter the output of the KQL query to only have the following columns: TimeGenerated, LogMessage and IPAddress
+ - 4. Filter the output of the KQL query to have AT LEAST the following columns: TimeGenerated, LogMessage, IPAddress and User
  - 5. Filter out anything other than KQL from the response
- - 6. Write the KQL - and the KQL ONLY - to a file with the original file name and insert '_KQL' before the file extension part
+ - 6. Convert the response into JSON
+ - 6. Write the JSON to a file with the original file name with a .JSON extension
  
  Log file: 
 

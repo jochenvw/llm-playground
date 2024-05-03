@@ -6,6 +6,8 @@ import os
 from semantic_kernel.functions.kernel_arguments import KernelArguments
 from semantic_kernel.planners import SequentialPlanner
 from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
+from semantic_kernel.core_plugins.time_plugin import TimePlugin as Time
+
 
 from promptflow.core import tool
 
@@ -29,6 +31,7 @@ async def kql_generator_tool(input: str) -> str:
     kernel.add_plugin(plugin_name="azure_monitor", parent_directory="./plugins")
     kernel.add_plugin(plugin_name="file_system", parent_directory="./plugins")
     kernel.add_plugin(plugin_name="extraction", parent_directory="./plugins")
+    kernel.add_plugin(Time, plugin_name="time")
     
     # Must be better way for this ... eagerly waiting PR :)
     with open("goal.txt", "r") as file:
