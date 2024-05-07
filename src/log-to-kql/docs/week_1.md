@@ -46,11 +46,11 @@ Here's where we're at today (May 7th). We've been building an application that r
 ## What's been learnt
 
 - Modifying and tweaking prompts is complicated and time consuming. And still GPT does not always 'do what you want'.
-Interesing post on-topic: [Musings on building a Generative AI product](https://www.linkedin.com/blog/engineering/generative-ai/musings-on-building-a-generative-ai-product)
+Interesting post on-topic: [Musings on building a Generative AI product](https://www.linkedin.com/blog/engineering/generative-ai/musings-on-building-a-generative-ai-product)
 
 - Semantic Kernel _also_ suffers from inconsistencies in documentation (so similar to the critique that LangChain gets). Semantic Kernel is available in Python, .NET and JAVA which can be confusing when looking for sample code. Also, a lot of the sample code is outdated and does not work against the latest version of the library.
 
-- GPT model version very significantly impacts performance. E.g. GPT 3.5 turbo vs GPT 4 is a huge difference. Both in terms of performance but also in terms of response quality predictability.
+- GPT model version significantly impacts performance. E.g. GPT 3.5 turbo vs GPT 4 is a huge difference. Both in terms of performance but also in terms of response quality predictability.
 
 ## What's next
 
