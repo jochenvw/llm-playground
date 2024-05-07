@@ -50,6 +50,8 @@ Interesting post on-topic: [Musings on building a Generative AI product](https:/
 
 - Semantic Kernel _also_ suffers from inconsistencies in documentation (so similar to the critique that LangChain gets). Semantic Kernel is available in Python, .NET and JAVA which can be confusing when looking for sample code. Also, a lot of the sample code is outdated and does not work against the latest version of the library.
 
+- The VSCode plugins (specially for Semantic Kernel) is a bit 'meh'. For instance: does play well with Python virtual environments and the boilerplate code it generates is outdated.
+
 - GPT model version significantly impacts performance. E.g. GPT 3.5 turbo vs GPT 4 is a huge difference. Both in terms of performance but also in terms of response quality predictability.
 
 ## What's next
