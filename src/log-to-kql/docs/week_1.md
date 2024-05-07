@@ -58,3 +58,9 @@ Interesing post on-topic: [Musings on building a Generative AI product](https://
 - [ ] Lightweight well-architected review of the design, consider operational excellence (e.g. logging), security of course etc.
 - [ ] Consider using 'handlebars' plans that allow for loops: [https://devblogs.microsoft.com/semantic-kernel/migrating-from-the-sequential-and-stepwise-planners-to-the-new-handlebars-and-stepwise-planner/](https://devblogs.microsoft.com/semantic-kernel/migrating-from-the-sequential-and-stepwise-planners-to-the-new-handlebars-and-stepwise-planner/)
 
+
+## 'Demo'
+
+- Example input: [../_data_in/apache.log](../_data_in/apache.log)
+- The 'magic', i.e. Semantic Kernel plugins: [../plugins/](../plugins/)
+- Example output: [../_data_in/apache.json](../_data_in/apache.json)
