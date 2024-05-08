@@ -59,6 +59,7 @@ Interesting post on-topic: [Musings on building a Generative AI product](https:/
 - [ ] Operationalisation of the application - how to 'get it in production'? How do we get this to Azure and where do we run it?
 - [ ] Lightweight well-architected review of the design, consider operational excellence (e.g. logging), security of course etc.
 - [ ] Consider using 'handlebars' plans that allow for loops: [https://devblogs.microsoft.com/semantic-kernel/migrating-from-the-sequential-and-stepwise-planners-to-the-new-handlebars-and-stepwise-planner/](https://devblogs.microsoft.com/semantic-kernel/migrating-from-the-sequential-and-stepwise-planners-to-the-new-handlebars-and-stepwise-planner/)
+- [ ] See if LLMs can derive 'source' and 'destination' IP addresses from the context. Otherwise suggest left = src
 
 
 ## 'Demo'
