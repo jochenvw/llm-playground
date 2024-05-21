@@ -7,7 +7,7 @@
         }
       }
     },
-    "logToKql": {
+    "semantic_kernel": {
       "variant_0": {
         "inputs": {
           "input": []

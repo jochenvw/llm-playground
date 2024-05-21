@@ -6,11 +6,11 @@ inputs:
     type: string
     default: ./_data_in/apache.log
 outputs:
-  KQL:
+  kql:
     type: string
-    reference: ${logToKql.output}
+    reference: ${semantic_kernel.output}
 nodes:
-- name: logToKql
+- name: semantic_kernel
   type: python
   source:
     type: code
