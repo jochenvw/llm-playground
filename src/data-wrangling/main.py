@@ -3,12 +3,15 @@ from langchain_core.output_parsers import JsonOutputParser, StrOutputParser
 from langchain_core.prompts import ChatMessagePromptTemplate,SystemMessagePromptTemplate, ChatPromptTemplate
 from langchain_openai.chat_models import AzureChatOpenAI
 from langchain_core.runnables import RunnablePassthrough
+from dotenv import load_dotenv
 from loguru import logger
 
+load_dotenv()
+
 ## Using OpenAI GPT-3 model deployed in Azure
-model = AzureChatOpenAI(azure_endpoint="https://nl-stu-jvw-openai.openai.azure.com", 
-                        api_key=os.environ['OPENAI_API_KEY'], 
-                        deployment_name="gpt-3", api_version="2023-05-15")
+model = AzureChatOpenAI(azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT'],
+                        api_key=os.environ['AZURE_OPENAI_API_KEY'], 
+                        deployment_name=os.environ['AZURE_OPENAI_DEPLOYMENT_NAME'], api_version="2023-05-15")
 
 cfgFilename = 'config.yaml'
 
