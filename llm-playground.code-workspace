@@ -16,7 +16,10 @@
 			"path": "src/team-guidance"
 		},
 		{
-			"path": "src/log-to-kql"			
+			"path": "src/log-to-kql"
+		},
+		{
+			"path": "src/recruitment"
 		}
 	],
 	"settings": {
